@@ -58,17 +58,20 @@ css_colors = """
     border-color: transparent;
 }
 
-.folder-color-button:hover {
-    border-color: alpha(black, .8);
+.folder-colors-restore {
+    background-color: transparent;
 }
 
 .folder-colors-restore:hover {
-    background-color: alpha(black, .1)
-}\n\n
+    background-color: rgba(255,255,255,0);
+}
 """
 
 for i in range(0, len(COLORS)):
-    css_colors += ".folder-colors-%s { background-color: %s; }\n" % (COLORS[i].lower(), COLORS[i])
+    css_colors += """
+.folder-colors-%s        { background-color: %s; }
+.folder-colors-%s:hover  { border-color:     %s; }
+""" % (COLORS[i].lower(), COLORS[i], COLORS[i].lower(), COLORS[i])
 
 provider = Gtk.CssProvider()
 provider.load_from_data(css_colors)
@@ -201,7 +204,6 @@ class ChangeColorFolder(GObject.GObject, Nemo.MenuProvider):
         for i in range(0, len(to_generate)):
             color, items_selected = to_generate[i]
             button = FolderColorButton(color)
-            # button = Nemo.SimpleButton.new_from_file(path, Gtk.IconSize.MENU)
             button.connect('clicked', self.menu_activate_cb, color, items_selected)
             widget.pack_start(button, False, False, 1)
 
@@ -209,19 +211,20 @@ class ChangeColorFolder(GObject.GObject, Nemo.MenuProvider):
 
         return widget
 
-
 class FolderColorButton(Nemo.SimpleButton):
     def __init__(self, color):
         super(FolderColorButton, self).__init__()
 
         c = self.get_style_context()
-        c.add_class("folder-color-button")
+
+        if color != "restore":
+            c.add_class("folder-color-button")
         c.add_class("folder-colors-%s" % color.lower())
 
         self.color = color
 
         self.da = Gtk.DrawingArea.new()
-        self.da.set_size_request(12, 8)
+        self.da.set_size_request(12, 10)
 
         self.set_image(self.da)
         self.da.connect("draw", self.on_draw)
@@ -236,16 +239,25 @@ class FolderColorButton(Nemo.SimpleButton):
         width = widget.get_allocated_width ();
         height = widget.get_allocated_height ();
 
+        grow = 0
+        line_width = 2.0
+
+        c = self.get_style_context()
+
+        if c.get_state() == Gtk.StateFlags.PRELIGHT:
+            grow = 1
+            line_width = 2.5
+
         cr.save()
 
         cr.set_source_rgb(0, 0, 0)
-        cr.set_line_width(2.0)
+        cr.set_line_width(line_width)
         cr.set_line_cap(1)
 
-        cr.move_to(2, 1)
-        cr.line_to(width - 2, height - 1)
-        cr.move_to(2, height - 1)
-        cr.line_to(width - 2, 1)
+        cr.move_to(3 - grow, 2 - grow)
+        cr.line_to(width - 3 + grow, height - 2 + grow)
+        cr.move_to(3 - grow, height - 2 + grow)
+        cr.line_to(width - 3 + grow, 2 - grow)
 
         cr.stroke()
 
@@ -254,15 +266,14 @@ class FolderColorButton(Nemo.SimpleButton):
         return False
 
     def draw_color(self, widget, cr):
-        rgba = Gdk.RGBA()
-        Gdk.RGBA.parse(rgba, self.color)
+        c = self.get_style_context()
 
         width = widget.get_allocated_width ();
         height = widget.get_allocated_height ();
 
         cr.save()
 
-        cr.set_source_rgb(rgba.red, rgba.green, rgba.blue)
+        cr.set_source_rgba(0,0,0,0)
         cr.rectangle(0, 0, width, height)
         cr.fill()
 
