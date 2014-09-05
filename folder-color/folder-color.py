@@ -19,6 +19,7 @@
 import os, urllib, gettext, locale
 from gi.repository import Nemo, GObject, Gio, GLib, Gtk, Gdk, GdkPixbuf, cairo
 _ = gettext.gettext
+P_ = gettext.ngettext
 
 import signal
 signal.signal(signal.SIGINT, signal.SIG_DFL)
@@ -199,12 +200,18 @@ class ChangeColorFolder(GObject.GObject, Nemo.MenuProvider):
 
         button = FolderColorButton("restore")
         button.connect('clicked', self.menu_activate_cb, 'restore', to_generate[0][1])
+        button.set_tooltip_text (P_("Restore the selected folder to its default color",
+                                    "Restore the selected folders to their default color",
+                                    len(to_generate[0][1])))
         widget.pack_start(button, False, False, 1)
 
         for i in range(0, len(to_generate)):
             color, items_selected = to_generate[i]
             button = FolderColorButton(color)
             button.connect('clicked', self.menu_activate_cb, color, items_selected)
+            button.set_tooltip_markup (P_("Color the selected folder <i>%s</i>" % color.lower(),
+                                          "Color the selected folders <i>%s</i>" % color.lower(),
+                                          len(items_selected)))
             widget.pack_start(button, False, False, 1)
 
         widget.show_all()
