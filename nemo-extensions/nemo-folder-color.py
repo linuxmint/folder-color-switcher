@@ -67,11 +67,16 @@ css_colors = """
 }
 
 .folder-colors-restore {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 1px;
+    border-color: transparent;
     background-color: transparent;
 }
 
 .folder-colors-restore:hover {
-    background-color: rgba(255,255,255,0);
+    background-color: transparent;
+    border-color: #9c9c9c;
 }
 """
 
@@ -256,10 +261,8 @@ class FolderColorButton(Nemo.SimpleButton):
 
         if color == "restore":
             c.add_class("folder-colors-restore")
-            self.da = Gtk.DrawingArea.new()
-            self.da.set_size_request(12, 10)
-            self.set_image(self.da)
-            self.da.connect("draw", self.on_draw)
+            image = Gtk.Image.new_from_icon_name("edit-undo-symbolic", Gtk.IconSize.MENU)
+            self.set_image(image) 
         else:
             c.add_class("folder-color-button")
             image = Gtk.Image()
