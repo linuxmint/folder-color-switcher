@@ -117,6 +117,7 @@ class ChangeColorFolder(GObject.GObject, Nemo.MenuProvider):
         folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_PUBLIC_SHARE)] = 'folder-publicshare.svg'
         folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_TEMPLATES)]    = 'folder-templates.svg'
         folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_VIDEOS)]       = 'folder-video.svg'
+        folders[GLib.get_home_dir()]                                         = 'folder-home.svg'
         return folders
     
     def get_icon_path(self, folder, color):
