@@ -25,6 +25,21 @@ P_ = gettext.ngettext
 import signal
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
+
+# LOGGING setup:
+# By default, we are only logging messages of level WARNING or higher.
+# For debugging purposes it is useful to run Nemo with
+# LOG_FOLDER_COLOR_SWITCHER=10 (DEBUG).
+import logging
+log_level = os.getenv('LOG_FOLDER_COLOR_SWITCHER', None)
+if not log_level:
+    log_level = logging.WARNING
+else:
+    log_level = int(log_level)
+logging.basicConfig(level=log_level)
+logger = logging.getLogger(__name__)
+
+
 KNOWN_COLORS = {'Mint-X': 'Green',
                 'Mint-X-Dark': 'Green',
                 'Rave-X-CX': 'Beige',
@@ -83,7 +98,7 @@ Gtk.StyleContext.add_provider_for_screen (screen, provider, 600) # GTK_STYLE_PRO
 
 class ChangeColorFolder(GObject.GObject, Nemo.MenuProvider):
     def __init__(self):
-        print "Initializing folder-color-switcher extension..."
+        logger.info("Initializing folder-color-switcher extension...")
         self.SEPARATOR = u'\u2015' * 4
         self.DEFAULT_FOLDERS = self.get_default_folders()   
         self.settings = Gio.Settings.new("org.cinnamon.desktop.interface")
@@ -93,6 +108,7 @@ class ChangeColorFolder(GObject.GObject, Nemo.MenuProvider):
     
     def get_theme(self):
         self.theme =  self.settings.get_string("icon-theme")
+        logger.info("Current icon theme: %s", self.theme)
         self.color = None
         self.base_theme = True
         self.base_color = None
@@ -103,6 +119,7 @@ class ChangeColorFolder(GObject.GObject, Nemo.MenuProvider):
                 self.base_theme = False
         if not self.base_theme and KNOWN_COLORS.has_key(self.theme):
             self.base_color = KNOWN_COLORS[self.theme]
+        logger.debug('base_color is now %s', self.base_color)
 
     def on_theme_changed(self, settings, key):
         self.get_theme()
