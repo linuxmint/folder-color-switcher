@@ -70,6 +70,148 @@ COLORS = [
             'Black'
            ]
 
+
+class Theme:
+    KNOWN_DIRECTORIES = {
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_DESKTOP): 'user-desktop.svg',
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOCUMENTS): 'folder-documents.svg',
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD): 'folder-download.svg',
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_MUSIC): 'folder-music.svg',
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_PICTURES): 'folder-pictures.svg',
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_PUBLIC_SHARE): 'folder-publicshare.svg',
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_TEMPLATES): 'folder-templates.svg',
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_VIDEOS): 'folder-video.svg',
+        GLib.get_home_dir(): 'folder-home.svg',
+    }
+    logger.debug("Known directories are: %s" % KNOWN_DIRECTORIES)
+
+    KNOWN_THEMES = {
+        'Mint-X': 'Green',
+        'Mint-X-Dark': 'Green',
+        'Rave-X-CX': 'Beige',
+        'Faience': 'Beige',
+        'gnome': 'Beige',
+        'Matrinileare': 'Beige',
+        'menta': 'Green',
+        'mate': 'Beige',
+        'oxygen': 'Blue'
+    }
+    logger.debug("Known themes are: %s" % KNOWN_THEMES)
+
+    def __init__(self, base_name, color_variant):
+        self.base_name = base_name
+        self.color_variant = color_variant
+
+    def __str__(self):
+        if self.color_variant:
+            return "%s-%s" % (self.base_name, self.color_variant)
+        else:
+            return "%s" % self.base_name
+
+    @staticmethod
+    def parse(theme_str):
+        base_name = theme_str
+        color_variant = None
+        for color in COLORS:
+            if theme_str.endswith("-%s" % color):
+                base_name = theme_str[:-len("-%s" % color)]
+                color_variant = color
+        return base_name, color_variant
+
+    @staticmethod
+    def from_theme_name(theme_str):
+        base_name, color_variant = Theme.parse(theme_str)
+        return Theme(base_name, color_variant)
+
+    @property
+    def base_path(self):
+        return "/usr/share/icons/%s/" % self
+
+    def get_folder_icon_path(self, directory=None):
+        icon_name = Theme.KNOWN_DIRECTORIES.get(directory, 'folder.svg')
+        return os.path.join(self.base_path, "places/48/", icon_name)
+
+    def get_index_theme_path(self):
+        return os.path.join(self.base_path, "index.theme")
+
+    def has_svg_for_folder(self, directory=None):
+        path = self.get_folder_icon_path(directory)
+        return os.path.isfile(path)
+
+    def inherited_themes(self):
+        logger.debug('Importing config parser...')
+        import ConfigParser
+        parser = ConfigParser.RawConfigParser()
+        index_theme_path = self.get_index_theme_path()
+        try:
+            logger.debug('Trying to read index.theme at %s' % index_theme_path)
+            parser.read(index_theme_path)
+            inherits_str = parser.get('Icon Theme', 'Inherits')
+            logger.debug('Theme %s inherits %s' % (self, inherits_str))
+            result = []
+            for parent in inherits_str.split(","):
+                result.append(Theme.from_theme_name(parent))
+            return result
+        except:
+            logger.info('Could not read index.theme for theme %s' % self)
+            return []
+
+    def get_ancestor_defining_folder_svg(self, directory=None):
+        if self.has_svg_for_folder(directory):
+            return self
+        for theme in self.inherited_themes():
+            ancestor = theme.get_ancestor_defining_folder_svg(directory)
+            if ancestor:
+                return ancestor
+        return None
+
+    def sibling(self, color):
+        if color == self.color:
+            # This theme implements the desired color
+            return self
+        elif color == Theme.KNOWN_THEMES.get(self.base_name):
+            # The base version of this theme implements the desired color
+            return Theme(self.base_name, None)
+        else:
+            # The color belongs to a color variant
+            return Theme(self.base_name, color)
+
+    def find_folder_icon(self, color, directory=None):
+        logger.debug("Trying to find icon for directory %s in %s for theme %s" % (directory, color, self))
+        relevant_ancestor = self.get_ancestor_defining_folder_svg(directory)
+        logger.debug("Ancestor defining SVG is %s" % relevant_ancestor)
+        colored_theme = relevant_ancestor.sibling(color)
+        icon_path = colored_theme.get_folder_icon_path(directory)
+        logger.debug("Checking for icon in %s" % icon_path)
+        if os.path.isfile(icon_path):
+            logger.debug("Icon found")
+            return icon_path
+        else:
+            logger.debug("No suitable icon found")
+            return None
+
+    def get_supported_colors(self, paths):
+        supported_colors = []
+
+        for color in COLORS:
+            color_supported = True
+            for directory in paths:
+                icon_path = self.find_folder_icon(color, directory)
+                if not icon_path:
+                    color_supported = False
+                    break
+            if color_supported:
+                supported_colors.append(color)
+        return supported_colors
+
+    @property
+    def color(self):
+        if self.color_variant:
+            return self.color_variant
+        else:
+            return Theme.KNOWN_THEMES.get(self.base_name)
+
+
 css_colors = """
 .folder-color-switcher-button {
     border-style: solid;
