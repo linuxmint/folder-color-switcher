@@ -16,7 +16,7 @@
 # along with Folder Color; if not, see http://www.gnu.org/licenses
 # for more information.
 
-import os, urllib, gettext, locale, collections
+import os, urllib, gettext, locale, collections, urlparse
 import subprocess
 from gi.repository import Nemo, GObject, Gio, GLib, Gtk, Gdk, GdkPixbuf, cairo
 _ = gettext.gettext
@@ -39,17 +39,6 @@ else:
 logging.basicConfig(level=log_level)
 logger = logging.getLogger(__name__)
 
-
-KNOWN_COLORS = {'Mint-X': 'Green',
-                'Mint-X-Dark': 'Green',
-                'Rave-X-CX': 'Beige',
-                'Faience': 'Beige',
-                'gnome': 'Beige',
-                'Matrinileare': 'Beige',
-                'menta': 'Green',
-                'mate': 'Beige',
-                'oxygen': 'Blue'
-                }
 
 COLORS = [ 
             'Sand',
@@ -276,176 +265,94 @@ provider.load_from_data(css_colors)
 screen = Gdk.Screen.get_default();
 Gtk.StyleContext.add_provider_for_screen (screen, provider, 600) # GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
 
-class ChangeColorFolder(GObject.GObject, Nemo.MenuProvider):
+class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvider):
     def __init__(self):
         logger.info("Initializing folder-color-switcher extension...")
         self.SEPARATOR = u'\u2015' * 4
-        self.DEFAULT_FOLDERS = self.get_default_folders()   
         self.settings = Gio.Settings.new("org.cinnamon.desktop.interface")
-        self.get_theme()
         self.settings.connect("changed::icon-theme", self.on_theme_changed)
-        pass
-    
-    def get_theme(self):
-        self.theme =  self.settings.get_string("icon-theme")
-        logger.info("Current icon theme: %s", self.theme)
-        self.color = None
-        self.base_theme = True
-        self.base_color = None
-        for color in COLORS:
-            if self.theme.endswith("-%s" % color):
-                self.theme = self.theme[:-len("-%s" % color)]
-                self.color = color
-                self.base_theme = False
-        if not self.base_theme and KNOWN_COLORS.has_key(self.theme):
-            self.base_color = KNOWN_COLORS[self.theme]
-        logger.debug('base_color is now %s', self.base_color)
+        self.on_theme_changed(None, None)
 
     def on_theme_changed(self, settings, key):
-        self.get_theme()
+        self.update_theme(self.settings.get_string("icon-theme"))
 
-    def get_default_folders(self):
-        folders = {}
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_DESKTOP)]      = 'user-desktop.svg'
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOCUMENTS)]    = 'folder-documents.svg'
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD)]     = 'folder-download.svg'
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_MUSIC)]        = 'folder-music.svg'
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_PICTURES)]     = 'folder-pictures.svg'
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_PUBLIC_SHARE)] = 'folder-publicshare.svg'
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_TEMPLATES)]    = 'folder-templates.svg'
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_VIDEOS)]       = 'folder-video.svg'
-        folders[GLib.get_home_dir()]                                         = 'folder-home.svg'
-        return folders
-    
-    def get_icon_path(self, folder, color):
-        try:
-            icon_name = self.DEFAULT_FOLDERS[folder]
-        except:
-            icon_name = 'folder.svg'
-
-        if not self.base_theme and self.base_color is not None and self.base_color == color:
-            path = os.path.join("/usr/share/icons/%s/places/48/%s" % (self.theme, icon_name))
-        else:
-            path = os.path.join("/usr/share/icons/%s-%s/places/48/%s" % (self.theme, color, icon_name))
-
-        return path
-    
     def menu_activate_cb(self, menu, color, folders):
+        self.set_folder_icons(color, folders)
 
-        for each_folder in folders:
-            
-            if each_folder.is_gone():
-                continue
-            
-            # Get object
-            path = urllib.unquote(each_folder.get_uri()[7:])
-            folder = Gio.File.new_for_path(path)
-            info = folder.query_info('metadata::custom-icon', 0, None)
-            
-            # Set color
-            if not color == 'restore':
-                icon_file = Gio.File.new_for_path(self.get_icon_path(path, color))
-                icon_uri = icon_file.get_uri()
-                info.set_attribute_string('metadata::custom-icon', icon_uri)
-            # Restore = Unset icon
-            else:
-                info.set_attribute('metadata::custom-icon', Gio.FileAttributeType.INVALID, 0) 
-            
-            # Write changes
-            folder.set_attributes_from_info(info, 0, None)
-
-            # Touch the directory to make Nemo re-render its icons
-            subprocess.call(["touch", path])
-    
     def get_background_items(self, window, current_folder):
         return
 
     # Nemo invoke this function in its startup > Then, create menu entry
     def get_file_items(self, window, items_selected):
+        if not items_selected:
+            # No items selected
+            return
 
         locale.setlocale(locale.LC_ALL, '')
         gettext.bindtextdomain('folder-color-switcher')
         gettext.textdomain('folder-color-switcher')
 
-        self.COLORS = collections.OrderedDict ([
-            ('Sand', _('Sand')),
-            ('Beige', _('Beige')),
-            ('Yellow', _('Yellow')),
-            ('Orange', _('Orange')),
-            ('Brown', _('Brown')),
-            ('Red', _('Red')),
-            ('Purple', _('Purple')),
-            ('Pink', _('Pink')), 
-            ('Blue', _('Blue')),            
-            ('Cyan', _('Cyan')),
-            ('Aqua', _('Aqua')),
-            ('Teal', _('Teal')),
-            ('Green', _('Green')),
-            ('White', _('White')),
-            ('Grey', _('Grey')),   
-            ('Black', _('Black'))
-           ])
-
-        # No items selected
-        if len(items_selected) == 0:
-            return
-        for each_item in items_selected:
-            # GNOME can only handle files
-            if each_item.get_uri_scheme() != 'file':
-                return
+        paths = []
+        for item in items_selected:
             # Only folders
-            if not each_item.is_directory():
+            if not item.is_directory():
+                logger.info("A selected item is not a directory, exiting")
                 return
 
-        found_colors = False
-        to_generate = []
+            item_uri = item.get_uri()
+            logger.debug('URI "%s" is in selection', item_uri)
+            uri_tuple = urlparse.urlparse(item_uri)
+            # GNOME can only handle "file" URI scheme
+            # break if the file URI has weired components (such as params)
+            if uri_tuple[0] != 'file' or uri_tuple[1] or uri_tuple[3] or uri_tuple[4] or uri_tuple[5]:
+                logger.info("A selected item as a weired URI, exiting")
+                return
+            path = uri_tuple[2]
+            logger.debug('Valid path selected: "%s"', path)
+            paths.append(path)
 
-        for color in self.COLORS.items():
-            color_code = color[0]
-            color_name = color[1]
-            if not self.base_theme and self.base_color is not None and self.base_color == color_code:
-                path = os.path.join("/usr/share/icons/%s/places/48/folder.svg" % self.theme)
-            else:
-                path = os.path.join("/usr/share/icons/%s-%s/places/48/folder.svg" % (self.theme, color_code))
-            if os.path.exists(path) and (self.color is None or color_code != self.color):
-                found_colors = True
-                to_generate.append((color_code, color_name, items_selected))
+        supported_colors = self.theme.get_supported_colors(paths)
 
-        if (found_colors):
+        if supported_colors:
+            logger.debug("At least one color supported: creating menu entry")
             item = Nemo.MenuItem(name='ChangeFolderColorMenu::Top')
-            item.set_widget_a(self.generate_widget(to_generate))
-            item.set_widget_b(self.generate_widget(to_generate))
+            item.set_widget_a(self.generate_widget(supported_colors, items_selected))
+            item.set_widget_b(self.generate_widget(supported_colors, items_selected))
             return Nemo.MenuItem.new_separator('ChangeFolderColorMenu::TopSep'),   \
                    item,                                                           \
                    Nemo.MenuItem.new_separator('ChangeFolderColorMenu::BotSep')
         else:
+            logger.warning("Could not find any supported colors")
             return
 
-    def generate_widget(self, to_generate):
+    def generate_widget(self, colors, items):
         widget = Gtk.Box.new(Gtk.Orientation.HORIZONTAL, 1)
+
+        # Generate restore button
         button = FolderColorButton("restore")
-        button.connect('clicked', self.menu_activate_cb, 'restore', to_generate[0][2])
-        if (len(to_generate[0][2]) > 1):
+        button.connect('clicked', self.menu_activate_cb, None, items)
+        if len(items) > 1:
             button.set_tooltip_text (_("Restores the color of the selected folders"))
         else:
             button.set_tooltip_text (_("Restores the color of the selected folder"))
-
         widget.pack_start(button, False, False, 1)
 
-        for i in range(0, len(to_generate)):
-            color_code, color_name, items_selected = to_generate[i]
+        # Generate buttons for the colors
+        for color in colors:
+            color_code = color
+            color_name = color.lower()
             button = FolderColorButton(color_code)
-            button.connect('clicked', self.menu_activate_cb, color_code, items_selected)
-            if (len(items_selected) > 1):
-                button.set_tooltip_markup (_("Changes the color of the selected folders to %s") % color_name.lower())
+            button.connect('clicked', self.menu_activate_cb, color_code, items)
+            if len(items) > 1:
+                button.set_tooltip_markup (_("Changes the color of the selected folders to %s") % color_name)
             else:
-                button.set_tooltip_markup (_("Changes the color of the selected folder to %s") % color_name.lower())
-                
+                button.set_tooltip_markup (_("Changes the color of the selected folder to %s") % color_name)
             widget.pack_start(button, False, False, 1)
 
         widget.show_all()
 
         return widget
+
 
 class FolderColorButton(Nemo.SimpleButton):
     def __init__(self, color):
@@ -495,4 +402,4 @@ class FolderColorButton(Nemo.SimpleButton):
 
         return False
 
-    
+
