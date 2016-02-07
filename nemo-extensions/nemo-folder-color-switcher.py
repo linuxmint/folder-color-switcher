@@ -212,6 +212,44 @@ class Theme:
             return Theme.KNOWN_THEMES.get(self.base_name)
 
 
+class ChangeFolderColorBase:
+    def update_theme(self, theme_str):
+        logger.info("Current icon theme: %s", theme_str)
+        self.theme = Theme.from_theme_name(theme_str)
+        logger.info("Its color is %s", self.theme.color)
+
+    def set_folder_icons(self, color, items):
+        for item in items:
+
+            if item.is_gone():
+                continue
+
+            # Get object
+            path = urllib.unquote(item.get_uri()[7:])
+            directory = item.get_location()
+            info = directory.query_info('metadata::custom-icon', 0, None)
+
+            # Set color
+            if color:
+                icon_path = self.theme.find_folder_icon(color, path)
+                if icon_path:
+                    icon_file = Gio.File.new_for_path(icon_path)
+                    icon_uri = icon_file.get_uri()
+                    info.set_attribute_string('metadata::custom-icon', icon_uri)
+                    logger.info('Set custom-icon of %s to %s' % (path, icon_path))
+                else:
+                    logger.error('Could not find %s colored icon' % color)
+            else:
+                # A color of None unsets the custom-icon
+                info.set_attribute('metadata::custom-icon', Gio.FileAttributeType.INVALID, 0)
+
+            # Write changes
+            directory.set_attributes_from_info(info, 0, None)
+
+            # Touch the directory to make Nemo/Caja re-render its icons
+            subprocess.call(["touch", path])
+
+
 css_colors = """
 .folder-color-switcher-button {
     border-style: solid;
