@@ -16,167 +16,287 @@
 # along with Folder Color; if not, see http://www.gnu.org/licenses
 # for more information.
 
-import os, urllib, gettext, locale
+import os, urllib, gettext, locale, urlparse
 import subprocess
 from gi.repository import Caja, GObject, Gio, GLib
 _ = gettext.gettext
 
-KNOWN_COLORS = {'Mint-X': 'Green',
-                'Mint-X-Dark': 'Green',
-                'Rave-X-CX': 'Beige',
-                'Faience': 'Beige',
-                'gnome': 'Beige',
-                'Matrinileare': 'Beige',
-                'menta': 'Green',
-                'mate': 'Beige',
-                'oxygen': 'Blue'
-                }
+# LOGGING setup:
+# By default, we are only logging messages of level WARNING or higher.
+# For debugging purposes it is useful to run Nemo/Caja with
+# LOG_FOLDER_COLOR_SWITCHER=10 (DEBUG).
+import logging
+log_level = os.getenv('LOG_FOLDER_COLOR_SWITCHER', None)
+if not log_level:
+    log_level = logging.WARNING
+else:
+    log_level = int(log_level)
+logging.basicConfig(level=log_level)
+logger = logging.getLogger(__name__)
 
-class ChangeColorFolder(GObject.GObject, Caja.MenuProvider):
+
+COLORS = [
+            'Sand',
+            'Beige',
+            'Yellow',
+            'Orange',
+            'Brown',
+            'Red',
+            'Purple',
+            'Pink',
+            'Blue',
+            'Cyan',
+            'Aqua',
+            'Teal',
+            'Green',
+            'White',
+            'Grey',
+            'Black'
+           ]
+
+
+class Theme:
+    KNOWN_DIRECTORIES = {
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_DESKTOP): 'user-desktop.svg',
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOCUMENTS): 'folder-documents.svg',
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD): 'folder-download.svg',
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_MUSIC): 'folder-music.svg',
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_PICTURES): 'folder-pictures.svg',
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_PUBLIC_SHARE): 'folder-publicshare.svg',
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_TEMPLATES): 'folder-templates.svg',
+        GLib.get_user_special_dir(GLib.USER_DIRECTORY_VIDEOS): 'folder-video.svg',
+        GLib.get_home_dir(): 'folder-home.svg',
+    }
+    logger.debug("Known directories are: %s" % KNOWN_DIRECTORIES)
+
+    KNOWN_THEMES = {
+        'Mint-X': 'Green',
+        'Mint-X-Dark': 'Green',
+        'Rave-X-CX': 'Beige',
+        'Faience': 'Beige',
+        'gnome': 'Beige',
+        'Matrinileare': 'Beige',
+        'menta': 'Green',
+        'mate': 'Beige',
+        'oxygen': 'Blue'
+    }
+    logger.debug("Known themes are: %s" % KNOWN_THEMES)
+
+    def __init__(self, base_name, color_variant):
+        self.base_name = base_name
+        self.color_variant = color_variant
+
+    def __str__(self):
+        if self.color_variant:
+            return "%s-%s" % (self.base_name, self.color_variant)
+        else:
+            return "%s" % self.base_name
+
+    @staticmethod
+    def parse(theme_str):
+        base_name = theme_str
+        color_variant = None
+        for color in COLORS:
+            if theme_str.endswith("-%s" % color):
+                base_name = theme_str[:-len("-%s" % color)]
+                color_variant = color
+        return base_name, color_variant
+
+    @staticmethod
+    def from_theme_name(theme_str):
+        base_name, color_variant = Theme.parse(theme_str)
+        return Theme(base_name, color_variant)
+
+    @property
+    def base_path(self):
+        return "/usr/share/icons/%s/" % self
+
+    def get_folder_icon_path(self, directory=None):
+        icon_name = Theme.KNOWN_DIRECTORIES.get(directory, 'folder.svg')
+        return os.path.join(self.base_path, "places/48/", icon_name)
+
+    def get_index_theme_path(self):
+        return os.path.join(self.base_path, "index.theme")
+
+    def has_svg_for_folder(self, directory=None):
+        path = self.get_folder_icon_path(directory)
+        return os.path.isfile(path)
+
+    def inherited_themes(self):
+        logger.debug('Importing config parser...')
+        import ConfigParser
+        parser = ConfigParser.RawConfigParser()
+        index_theme_path = self.get_index_theme_path()
+        try:
+            logger.debug('Trying to read index.theme at %s' % index_theme_path)
+            parser.read(index_theme_path)
+            inherits_str = parser.get('Icon Theme', 'Inherits')
+            logger.debug('Theme %s inherits %s' % (self, inherits_str))
+            result = []
+            for parent in inherits_str.split(","):
+                result.append(Theme.from_theme_name(parent))
+            return result
+        except:
+            logger.info('Could not read index.theme for theme %s' % self)
+            return []
+
+    def get_ancestor_defining_folder_svg(self, directory=None):
+        if self.has_svg_for_folder(directory):
+            return self
+        for theme in self.inherited_themes():
+            ancestor = theme.get_ancestor_defining_folder_svg(directory)
+            if ancestor:
+                return ancestor
+        return None
+
+    def sibling(self, color):
+        if color == self.color:
+            # This theme implements the desired color
+            return self
+        elif color == Theme.KNOWN_THEMES.get(self.base_name):
+            # The base version of this theme implements the desired color
+            return Theme(self.base_name, None)
+        else:
+            # The color belongs to a color variant
+            return Theme(self.base_name, color)
+
+    def find_folder_icon(self, color, directory=None):
+        logger.debug("Trying to find icon for directory %s in %s for theme %s" % (directory, color, self))
+        relevant_ancestor = self.get_ancestor_defining_folder_svg(directory)
+        logger.debug("Ancestor defining SVG is %s" % relevant_ancestor)
+        colored_theme = relevant_ancestor.sibling(color)
+        icon_path = colored_theme.get_folder_icon_path(directory)
+        logger.debug("Checking for icon in %s" % icon_path)
+        if os.path.isfile(icon_path):
+            logger.debug("Icon found")
+            return icon_path
+        else:
+            logger.debug("No suitable icon found")
+            return None
+
+    def get_supported_colors(self, paths):
+        supported_colors = []
+
+        for color in COLORS:
+            color_supported = True
+            for directory in paths:
+                icon_path = self.find_folder_icon(color, directory)
+                if not icon_path:
+                    color_supported = False
+                    break
+            if color_supported:
+                supported_colors.append(color)
+        return supported_colors
+
+    @property
+    def color(self):
+        if self.color_variant:
+            return self.color_variant
+        else:
+            return Theme.KNOWN_THEMES.get(self.base_name)
+
+
+class ChangeFolderColorBase:
+    def update_theme(self, theme_str):
+        logger.info("Current icon theme: %s", theme_str)
+        self.theme = Theme.from_theme_name(theme_str)
+        logger.info("Its color is %s", self.theme.color)
+
+    def set_folder_icons(self, color, items):
+        for item in items:
+
+            if item.is_gone():
+                continue
+
+            # Get object
+            path = urllib.unquote(item.get_uri()[7:])
+            directory = item.get_location()
+            info = directory.query_info('metadata::custom-icon', 0, None)
+
+            # Set color
+            if color:
+                icon_path = self.theme.find_folder_icon(color, path)
+                if icon_path:
+                    icon_file = Gio.File.new_for_path(icon_path)
+                    icon_uri = icon_file.get_uri()
+                    info.set_attribute_string('metadata::custom-icon', icon_uri)
+                    logger.info('Set custom-icon of %s to %s' % (path, icon_path))
+                else:
+                    logger.error('Could not find %s colored icon' % color)
+            else:
+                # A color of None unsets the custom-icon
+                info.set_attribute('metadata::custom-icon', Gio.FileAttributeType.INVALID, 0)
+
+            # Write changes
+            directory.set_attributes_from_info(info, 0, None)
+
+            # Touch the directory to make Nemo/Caja re-render its icons
+            subprocess.call(["touch", path])
+
+
+class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvider):
     def __init__(self):                
         self.SEPARATOR = u'\u2015' * 4
-        self.DEFAULT_FOLDERS = self.get_default_folders()   
         self.settings = Gio.Settings.new("org.mate.interface")
-        self.get_theme()
         self.settings.connect("changed::icon-theme", self.on_theme_changed)
-        pass
-    
-    def get_theme(self):
-        self.theme =  self.settings.get_string("icon-theme")
-        self.color = None
-        self.base_theme = True
-        self.base_color = None      
-        for color in ['Aqua', 'Beige', 'Sand', 'Black', 'Blue', 'Brown', 'Cyan', 'Green', 'Grey', 'Orange', 'Pink', 'Purple', 'Red', 'Teal', 'White', 'Yellow']:
-            if self.theme.endswith("-%s" % color):
-                self.theme = self.theme[:-len("-%s" % color)]
-                self.color = color
-                self.base_theme = False
-        if not self.base_theme and KNOWN_COLORS.has_key(self.theme):
-            self.base_color = KNOWN_COLORS[self.theme]
+        self.on_theme_changed(None, None)
 
     def on_theme_changed(self, settings, key):
-        self.get_theme()
+        self.update_theme(self.settings.get_string("icon-theme"))
 
-    def get_default_folders(self):
-        folders = {}
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_DESKTOP)]      = 'user-desktop.svg'
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOCUMENTS)]    = 'folder-documents.svg'
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD)]     = 'folder-download.svg'
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_MUSIC)]        = 'folder-music.svg'
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_PICTURES)]     = 'folder-pictures.svg'
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_PUBLIC_SHARE)] = 'folder-publicshare.svg'
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_TEMPLATES)]    = 'folder-templates.svg'
-        folders[GLib.get_user_special_dir(GLib.USER_DIRECTORY_VIDEOS)]       = 'folder-video.svg'
-        return folders
-    
-    def get_icon_path(self, folder, color):
-        try:
-            icon_name = self.DEFAULT_FOLDERS[folder]
-        except:
-            icon_name = 'folder.svg'
-
-        if not self.base_theme and self.base_color is not None and self.base_color == color:
-            path = os.path.join("/usr/share/icons/%s/places/48/%s" % (self.theme, icon_name))
-        else:
-            path = os.path.join("/usr/share/icons/%s-%s/places/48/%s" % (self.theme, color, icon_name))
-
-        return path
-    
     def menu_activate_cb(self, menu, color, folders):
-
-        for each_folder in folders:
-            
-            if each_folder.is_gone():
-                continue
-            
-            # Get object
-            path = urllib.unquote(each_folder.get_uri()[7:])
-            folder = Gio.File.new_for_path(path)
-            info = folder.query_info('metadata::custom-icon', 0, None)
-            
-            # Set color
-            if not color == 'restore':
-                icon_file = Gio.File.new_for_path(self.get_icon_path(path, color))
-                icon_uri = icon_file.get_uri()
-                info.set_attribute_string('metadata::custom-icon', icon_uri)
-            # Restore = Unset icon
-            else:
-                info.set_attribute('metadata::custom-icon', Gio.FileAttributeType.INVALID, 0) 
-            
-            # Write changes
-            folder.set_attributes_from_info(info, 0, None)
-
-            # Touch the directory to make Caja re-render its icons
-            subprocess.call(["touch", path])
+        self.set_folder_icons(color, folders)
 
     # Caja invoke this function in its startup > Then, create menu entry
     def get_file_items(self, window, items_selected):
-        # No items selected
-        if len(items_selected) == 0:
+        if not items_selected:
+            # No items selected
             return
-        for each_item in items_selected:
-            # GNOME can only handle files
-            if each_item.get_uri_scheme() != 'file':
-                return
-            # Only folders
-            if not each_item.is_directory():
-                return
 
         locale.setlocale(locale.LC_ALL, '')
         gettext.bindtextdomain('folder-color-switcher')
         gettext.textdomain('folder-color-switcher')
-        
-        # Main menu [1 or +1 folder(s)]        
-        top_menuitem = Caja.MenuItem(name='ChangeFolderColorMenu::Top', label=_("Change color"), tip='', icon='')        
-        submenu = Caja.Menu()
-        top_menuitem.set_submenu(submenu)
-        
-        # Colors submenu
-        self.COLORS = { 'Aqua':       _("Aqua"),
-                        'Beige':      _("Beige"),
-                        'Sand':       _("Sand"),
-                        'Black':      _("Black"),
-                        'Blue':       _("Blue"),                        
-                        'Brown':      _("Brown"),
-                        'Cyan':       _("Cyan"),
-                        'Green':      _("Green"),
-                        'Grey':       _("Grey"),
-                        'Orange':     _("Orange"),
-                        'Pink':       _("Pink"),
-                        'Purple':     _("Purple"),
-                        'Red':        _("Red"),
-                        'Teal':       _("Teal"),
-                        'White':      _("White"),
-                        'Yellow':     _("Yellow")}
 
-        sorted_colors = sorted(self.COLORS.items(), key=lambda x:x[1])
+        paths = []
+        for item in items_selected:
+            # Only folders
+            if not item.is_directory():
+                logger.info("A selected item is not a directory, exiting")
+                return
 
-        found_colors = False        
-        for color in sorted_colors:
-            if not self.base_theme and self.base_color is not None and self.base_color == color[0]:
-                path = os.path.join("/usr/share/icons/%s/places/48/folder.svg" % self.theme)
-            else:
-                path = os.path.join("/usr/share/icons/%s-%s/places/48/folder.svg" % (self.theme, color[0]))
-            if os.path.exists(path) and (self.color is None or color[0] != self.color):
-                found_colors = True
+            item_uri = item.get_uri()
+            logger.debug('URI "%s" is in selection', item_uri)
+            uri_tuple = urlparse.urlparse(item_uri)
+            # GNOME can only handle "file" URI scheme
+            # break if the file URI has weired components (such as params)
+            if uri_tuple[0] != 'file' or uri_tuple[1] or uri_tuple[3] or uri_tuple[4] or uri_tuple[5]:
+                logger.info("A selected item as a weired URI, exiting")
+                return
+            path = uri_tuple[2]
+            logger.debug('Valid path selected: "%s"', path)
+            paths.append(path)
+
+        supported_colors = self.theme.get_supported_colors(paths)
+
+        if supported_colors:
+            top_menuitem = Caja.MenuItem(name='ChangeFolderColorMenu::Top', label=_("Change color"), tip='', icon='')
+            submenu = Caja.Menu()
+            top_menuitem.set_submenu(submenu)
+
+            for color in supported_colors:
                 name = ''.join(['ChangeFolderColorMenu::"', color[0], '"'])
-                label = color[1]
-                item = Caja.MenuItem(name=name, label=label, icon='folder-color-switcher-%s' % color[0].lower())
-                item.connect('activate', self.menu_activate_cb, color[0], items_selected)
-                submenu.append_item(item)            
-        
-        if (found_colors):        
+                label = color
+                item = Caja.MenuItem(name=name, label=label, icon='folder-color-switcher-%s' % color.lower())
+                item.connect('activate', self.menu_activate_cb, color, items_selected)
+                submenu.append_item(item)
+
             # Separator
             item_sep = Caja.MenuItem(name='ChangeFolderColorMenu::Sep1', label=self.SEPARATOR, sensitive=False)
             submenu.append_item(item_sep)
-            
+
             # Restore
             item_restore = Caja.MenuItem(name='ChangeFolderColorMenu::Restore', label=_("Default"))
-            item_restore.connect('activate', self.menu_activate_cb, 'restore', items_selected)
+            item_restore.connect('activate', self.menu_activate_cb, None, items_selected)
             submenu.append_item(item_restore)
-            
-            return top_menuitem,
 
-        else:
-            return
-            
+            return top_menuitem,
