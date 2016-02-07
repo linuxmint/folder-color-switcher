@@ -6,17 +6,17 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # Folder Color is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with Folder Color; if not, see http://www.gnu.org/licenses
 # for more information.
 
-import os, urllib, gettext, locale, collections, urlparse
+import os, urllib, gettext, locale, urlparse
 import subprocess
 from gi.repository import Nemo, GObject, Gio, GLib, Gtk, Gdk, GdkPixbuf, cairo
 _ = gettext.gettext
@@ -28,7 +28,7 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 # LOGGING setup:
 # By default, we are only logging messages of level WARNING or higher.
-# For debugging purposes it is useful to run Nemo with
+# For debugging purposes it is useful to run Nemo/Caja with
 # LOG_FOLDER_COLOR_SWITCHER=10 (DEBUG).
 import logging
 log_level = os.getenv('LOG_FOLDER_COLOR_SWITCHER', None)
@@ -40,22 +40,22 @@ logging.basicConfig(level=log_level)
 logger = logging.getLogger(__name__)
 
 
-COLORS = [ 
+COLORS = [
             'Sand',
             'Beige',
             'Yellow',
             'Orange',
             'Brown',
             'Red',
-            'Purple', 
-            'Pink', 
-            'Blue',            
+            'Purple',
+            'Pink',
+            'Blue',
             'Cyan',
             'Aqua',
             'Teal',
             'Green',
             'White',
-            'Grey',            
+            'Grey',
             'Black'
            ]
 
@@ -247,7 +247,7 @@ css_colors = """
     border-color: transparent;
 }
 
-.folder-color-switcher-button:hover {    
+.folder-color-switcher-button:hover {
     border-color: #9c9c9c;
 }
 
@@ -369,10 +369,10 @@ class FolderColorButton(Nemo.SimpleButton):
         else:
             c.add_class("folder-color-switcher-button")
             image = Gtk.Image()
-            image.set_from_file("/usr/share/icons/hicolor/22x22/apps/folder-color-switcher-%s.png" % color.lower())   
-            self.set_image(image)               
+            image.set_from_file("/usr/share/icons/hicolor/22x22/apps/folder-color-switcher-%s.png" % color.lower())
+            self.set_image(image)
 
-    def on_draw(self, widget, cr):        
+    def on_draw(self, widget, cr):
         width = widget.get_allocated_width ();
         height = widget.get_allocated_height ();
 
@@ -401,5 +401,3 @@ class FolderColorButton(Nemo.SimpleButton):
         cr.restore()
 
         return False
-
-
