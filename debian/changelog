@@ -1,3 +1,10 @@
+folder-color-switcher (1.0.6) sarah; urgency=medium
+
+  [ Michael Webster ]
+  * nemo-folder-color-switcher: add folder-home to default folders
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 19 Feb 2016 12:29:58 +0000
+
 folder-color-switcher (1.0.5) rosa; urgency=medium
 
   [ Clement Lefebvre ]
