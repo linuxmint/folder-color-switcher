@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-15 21:45+0200\n"
-"PO-Revision-Date: 2015-06-18 11:34+0000\n"
-"Last-Translator: Slobodan Simić <Unknown>\n"
+"PO-Revision-Date: 2016-02-17 23:23+0000\n"
+"Last-Translator: Саша Петровић <salepetronije@gmail.com>\n"
 "Language-Team: српски <xfce4@xfce4.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-06 14:10+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2016-04-21 14:43+0000\n"
+"X-Generator: Launchpad (build 17995)\n"
 "Language: sr\n"
 
 #: ../nemo-extensions/nemo-folder-color.py:172
@@ -42,7 +42,7 @@ msgstr "наранџасту"
 #: ../nemo-extensions/nemo-folder-color.py:176
 #: ../caja-extensions/caja-folder-color.py:139
 msgid "Brown"
-msgstr "браон"
+msgstr "смеђу"
 
 #: ../nemo-extensions/nemo-folder-color.py:177
 #: ../caja-extensions/caja-folder-color.py:146
