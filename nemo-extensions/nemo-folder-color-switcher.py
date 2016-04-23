@@ -60,7 +60,7 @@ COLORS = [
            ]
 
 
-class Theme:
+class Theme(object):
     KNOWN_DIRECTORIES = {
         GLib.get_user_special_dir(GLib.USER_DIRECTORY_DESKTOP): 'user-desktop.svg',
         GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOCUMENTS): 'folder-documents.svg',
@@ -201,7 +201,7 @@ class Theme:
             return Theme.KNOWN_THEMES.get(self.base_name)
 
 
-class ChangeFolderColorBase:
+class ChangeFolderColorBase(object):
     def update_theme(self, theme_str):
         logger.info("Current icon theme: %s", theme_str)
         self.theme = Theme.from_theme_name(theme_str)
