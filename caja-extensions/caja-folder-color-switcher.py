@@ -109,6 +109,9 @@ class ChangeColorFolder(GObject.GObject, Caja.MenuProvider):
             # Touch the directory to make Caja re-render its icons
             subprocess.call(["touch", path])
 
+    def get_background_items(self, window, current_folder):
+        return []
+
     # Caja invoke this function in its startup > Then, create menu entry
     def get_file_items(self, window, items_selected):
         # No items selected
