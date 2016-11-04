@@ -1,3 +1,26 @@
+folder-color-switcher (1.1.0) serena; urgency=medium
+
+  [ Jan Philipp Wächter ]
+  * nemo-folder-color-switcher: use Python logging
+  * nemo: Implement dedicate Theme class
+  * nemo: Implement base class for extensions
+  * nemo: Use Theme and base class
+  * caja: Port changes to Caja extension
+  * Clean up code
+  * Use new-style classes in both extensions
+  * Fail gracefully if folder.svg cannot be found
+
+  [ monsta ]
+  * caja extension: add dummy get_background_items function
+
+  [ Clement Lefebvre ]
+  * debug: Switch warnings to debug logs
+  * Fix issue in previous merge
+  * l10n: Fix translation of color names
+  * l10n: Add pot file
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 04 Nov 2016 13:09:20 +0000
+
 folder-color-switcher (1.0.9) sarah; urgency=medium
 
   * Updated translations
