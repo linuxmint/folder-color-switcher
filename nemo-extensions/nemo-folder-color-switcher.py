@@ -16,7 +16,7 @@
 # along with Folder Color; if not, see http://www.gnu.org/licenses
 # for more information.
 
-import os, urllib, gettext, locale, urlparse
+import os, urllib, gettext, locale, urlparse, collections
 import subprocess
 from gi.repository import Nemo, GObject, Gio, GLib, Gtk, Gdk, GdkPixbuf, cairo
 _ = gettext.gettext
@@ -39,26 +39,31 @@ else:
 logging.basicConfig(level=log_level)
 logger = logging.getLogger(__name__)
 
-
-COLORS = [
-            'Sand',
-            'Beige',
-            'Yellow',
-            'Orange',
-            'Brown',
-            'Red',
-            'Purple',
-            'Pink',
-            'Blue',
-            'Cyan',
-            'Aqua',
-            'Teal',
-            'Green',
-            'White',
-            'Grey',
-            'Black'
-           ]
-
+# Note: we don't actually use the second column programmatically
+# It's there so color names are picked up when the pot file is generated
+# Further down the code we use gettext on the first column...
+# The reason we don't pick up the second column is because the gettext domain
+# needs to be the one of the file browser right now.. and then switch to our own domain
+# when the time comes to generate the menu.
+# We need this list prior to that moment though.
+COLORS = collections.OrderedDict ([
+            ('Sand', _('Sand')),
+            ('Beige', _('Beige')),
+            ('Yellow', _('Yellow')),
+            ('Orange', _('Orange')),
+            ('Brown', _('Brown')),
+            ('Red', _('Red')),
+            ('Purple', _('Purple')),
+            ('Pink', _('Pink')),
+            ('Blue', _('Blue')),
+            ('Cyan', _('Cyan')),
+            ('Aqua', _('Aqua')),
+            ('Teal', _('Teal')),
+            ('Green', _('Green')),
+            ('White', _('White')),
+            ('Grey', _('Grey')),
+            ('Black', _('Black'))
+           ])
 
 class Theme(object):
     KNOWN_DIRECTORIES = {
@@ -343,7 +348,7 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
         # Generate buttons for the colors
         for color in colors:
             color_code = color
-            color_name = color.lower()
+            color_name = _(color).lower()
             button = FolderColorButton(color_code)
             button.connect('clicked', self.menu_activate_cb, color_code, items)
             if len(items) > 1:
