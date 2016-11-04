@@ -236,9 +236,6 @@ class ChangeFolderColorBase(object):
             # Touch the directory to make Nemo/Caja re-render its icons
             subprocess.call(["touch", path])
 
-    def get_background_items(self, window, current_folder):
-        return []
-
 class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvider):
     def __init__(self):
         self.SEPARATOR = u'\u2015' * 4
@@ -251,6 +248,9 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvide
 
     def menu_activate_cb(self, menu, color, folders):
         self.set_folder_icons(color, folders)
+
+    def get_background_items(self, window, current_folder):
+        return []
 
     # Caja invoke this function in its startup > Then, create menu entry
     def get_file_items(self, window, items_selected):
