@@ -169,7 +169,7 @@ class Theme(object):
         logger.debug("Trying to find icon for directory %s in %s for theme %s" % (directory, color, self))
         relevant_ancestor = self.get_ancestor_defining_folder_svg(directory)
         if not relevant_ancestor:
-            logger.warning("Could not find ancestor defining SVG")
+            logger.debug("Could not find ancestor defining SVG")
             return None
         logger.debug("Ancestor defining SVG is %s" % relevant_ancestor)
         colored_theme = relevant_ancestor.sibling(color)
@@ -325,7 +325,7 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
                    item,                                                           \
                    Nemo.MenuItem.new_separator('ChangeFolderColorMenu::BotSep')
         else:
-            logger.warning("Could not find any supported colors")
+            logger.debug("Could not find any supported colors")
             return
 
     def generate_widget(self, colors, items):
