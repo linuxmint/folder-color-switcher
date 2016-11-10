@@ -294,7 +294,7 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvide
             top_menuitem.set_submenu(submenu)
 
             for color in supported_colors:
-                name = ''.join(['ChangeFolderColorMenu::"', color[0], '"'])
+                name = ''.join(['ChangeFolderColorMenu::"', color, '"'])
                 label = _(color)
                 item = Caja.MenuItem(name=name, label=label, icon='folder-color-switcher-%s' % color.lower())
                 item.connect('activate', self.menu_activate_cb, color, items_selected)
