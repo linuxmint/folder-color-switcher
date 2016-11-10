@@ -1,3 +1,9 @@
+folder-color-switcher (1.1.1) serena; urgency=medium
+
+  * l10n: Update translations
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 10 Nov 2016 10:04:02 +0000
+
 folder-color-switcher (1.1.0) serena; urgency=medium
 
   [ Jan Philipp Wächter ]
