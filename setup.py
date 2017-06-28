@@ -31,7 +31,7 @@ data = [
 # Setup stage
 DistUtilsExtra.auto.setup(
     name         = "folder-color-switcher",
-    version      = "1.1.4",
+    version      = "1.1.5",
     description  = "Change the color of your folders",
     author       = "Linux Mint",
     author_email = "root@linuxmint.com",
