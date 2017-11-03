@@ -1,16 +1,16 @@
-# Chinese (Hong Kong) translation for linuxmint
-# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# Neapolitan translation for linuxmint
+# Copyright (c) 2017 Rosetta Contributors and Canonical Ltd 2017
 # This file is distributed under the same license as the linuxmint package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-15 21:45+0200\n"
-"PO-Revision-Date: 2014-11-17 11:06+0000\n"
-"Last-Translator: tomoe_musashi <hkg.musashi@gmail.com>\n"
-"Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
+"PO-Revision-Date: 2017-06-28 19:07+0000\n"
+"Last-Translator: Silvio Celeste <Unknown>\n"
+"Language-Team: Neapolitan <nap@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,108 +20,108 @@ msgstr ""
 #: ../nemo-extensions/nemo-folder-color.py:172
 #: ../caja-extensions/caja-folder-color.py:136
 msgid "Sand"
-msgstr "卡其色"
+msgstr "Sabbia"
 
 #: ../nemo-extensions/nemo-folder-color.py:173
 #: ../caja-extensions/caja-folder-color.py:135
 msgid "Beige"
-msgstr "米色"
+msgstr "Beige"
 
 #: ../nemo-extensions/nemo-folder-color.py:174
 #: ../caja-extensions/caja-folder-color.py:149
 msgid "Yellow"
-msgstr "黃色"
+msgstr "Giall"
 
 #: ../nemo-extensions/nemo-folder-color.py:175
 #: ../caja-extensions/caja-folder-color.py:143
 msgid "Orange"
-msgstr "橙色"
+msgstr "Arancio"
 
 #: ../nemo-extensions/nemo-folder-color.py:176
 #: ../caja-extensions/caja-folder-color.py:139
 msgid "Brown"
-msgstr "啡色"
+msgstr "Marrò"
 
 #: ../nemo-extensions/nemo-folder-color.py:177
 #: ../caja-extensions/caja-folder-color.py:146
 msgid "Red"
-msgstr "紅色"
+msgstr "Russ"
 
 #: ../nemo-extensions/nemo-folder-color.py:178
 #: ../caja-extensions/caja-folder-color.py:145
 msgid "Purple"
-msgstr "紫色"
+msgstr "Viola"
 
 #: ../nemo-extensions/nemo-folder-color.py:179
 #: ../caja-extensions/caja-folder-color.py:144
 msgid "Pink"
-msgstr "粉紅色"
+msgstr "Rosa"
 
 #: ../nemo-extensions/nemo-folder-color.py:180
 #: ../caja-extensions/caja-folder-color.py:138
 msgid "Blue"
-msgstr "藍色"
+msgstr "Blè"
 
 #: ../nemo-extensions/nemo-folder-color.py:181
 #: ../caja-extensions/caja-folder-color.py:140
 msgid "Cyan"
-msgstr "青色"
+msgstr "Ciano"
 
 #. Colors submenu
 #: ../nemo-extensions/nemo-folder-color.py:182
 #: ../caja-extensions/caja-folder-color.py:134
 msgid "Aqua"
-msgstr "海藍色"
+msgstr "Azzurr"
 
 #: ../nemo-extensions/nemo-folder-color.py:183
 #: ../caja-extensions/caja-folder-color.py:147
 msgid "Teal"
-msgstr "藍綠色"
+msgstr "Verde Comm all'Acqua"
 
 #: ../nemo-extensions/nemo-folder-color.py:184
 #: ../caja-extensions/caja-folder-color.py:141
 msgid "Green"
-msgstr "綠色"
+msgstr "Verd"
 
 #: ../nemo-extensions/nemo-folder-color.py:185
 #: ../caja-extensions/caja-folder-color.py:148
 msgid "White"
-msgstr "白色"
+msgstr "Ianc"
 
 #: ../nemo-extensions/nemo-folder-color.py:186
 #: ../caja-extensions/caja-folder-color.py:142
 msgid "Grey"
-msgstr "灰色"
+msgstr "Grigio"
 
 #: ../nemo-extensions/nemo-folder-color.py:187
 #: ../caja-extensions/caja-folder-color.py:137
 msgid "Black"
-msgstr "黑色"
+msgstr "Nir"
 
 #: ../nemo-extensions/nemo-folder-color.py:230
 msgid "Restores the color of the selected folders"
-msgstr "還原已選擇資料夾的顏色"
+msgstr "Miett n''ata vot 'o culor e sti cartell comm stevn primm"
 
 #: ../nemo-extensions/nemo-folder-color.py:232
 msgid "Restores the color of the selected folder"
-msgstr "還原已選擇資料夾的顏色"
+msgstr "Miett n''ata vot 'o culor 'e sta cartell comm stev primm"
 
 #: ../nemo-extensions/nemo-folder-color.py:241
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr "更改已選擇資料夾的顏色至 %s"
+msgstr "Cagn o culor 'e sti cartell a %s"
 
 #: ../nemo-extensions/nemo-folder-color.py:243
 #, python-format
 msgid "Changes the color of the selected folder to %s"
-msgstr "更改已選擇資料夾的顏色至 %s"
+msgstr "Cagn o culor 'e sta cartell a %s"
 
 #. Main menu [1 or +1 folder(s)]
 #: ../caja-extensions/caja-folder-color.py:129
 msgid "Change color"
-msgstr "更改顏色"
+msgstr "Cagn culor"
 
 #. Restore
 #: ../caja-extensions/caja-folder-color.py:173
 msgid "Default"
-msgstr "預設值"
+msgstr "Predefinit"

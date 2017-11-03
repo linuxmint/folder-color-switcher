@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-15 21:45+0200\n"
-"PO-Revision-Date: 2014-10-10 08:13+0000\n"
-"Last-Translator: Ondřej Kolín <ondrej.kolin@gmail.com>\n"
+"PO-Revision-Date: 2017-09-06 14:40+0000\n"
+"Last-Translator: Pavel Borecki <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-06-28 07:50+0000\n"
-"X-Generator: Launchpad (build 18416)\n"
+"X-Launchpad-Export-Date: 2017-11-03 11:43+0000\n"
+"X-Generator: Launchpad (build 18493)\n"
 
 #: ../nemo-extensions/nemo-folder-color.py:172
 #: ../caja-extensions/caja-folder-color.py:136
 msgid "Sand"
-msgstr "Písková"
+msgstr "pískově žlutou"
 
 #: ../nemo-extensions/nemo-folder-color.py:173
 #: ../caja-extensions/caja-folder-color.py:135
@@ -65,18 +65,18 @@ msgstr "modrou"
 #: ../nemo-extensions/nemo-folder-color.py:181
 #: ../caja-extensions/caja-folder-color.py:140
 msgid "Cyan"
-msgstr "azurovou"
+msgstr "tyrkysovou"
 
 #. Colors submenu
 #: ../nemo-extensions/nemo-folder-color.py:182
 #: ../caja-extensions/caja-folder-color.py:134
 msgid "Aqua"
-msgstr "Azurová"
+msgstr "azurovou"
 
 #: ../nemo-extensions/nemo-folder-color.py:183
 #: ../caja-extensions/caja-folder-color.py:147
 msgid "Teal"
-msgstr "Hluboká zelenomodrá"
+msgstr "temně zelenomodrou"
 
 #: ../nemo-extensions/nemo-folder-color.py:184
 #: ../caja-extensions/caja-folder-color.py:141
