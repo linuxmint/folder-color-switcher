@@ -67,14 +67,14 @@ COLORS = collections.OrderedDict ([
 
 class Theme(object):
     KNOWN_DIRECTORIES = {
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_DESKTOP): 'user-desktop.svg',
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOCUMENTS): 'folder-documents.svg',
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD): 'folder-download.svg',
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_MUSIC): 'folder-music.svg',
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_PICTURES): 'folder-pictures.svg',
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_PUBLIC_SHARE): 'folder-publicshare.svg',
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_TEMPLATES): 'folder-templates.svg',
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_VIDEOS): 'folder-video.svg',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP): 'user-desktop.svg',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS): 'folder-documents.svg',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD): 'folder-download.svg',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_MUSIC): 'folder-music.svg',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES): 'folder-pictures.svg',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PUBLIC_SHARE): 'folder-publicshare.svg',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_TEMPLATES): 'folder-templates.svg',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS): 'folder-video.svg',
         GLib.get_home_dir(): 'folder-home.svg',
     }
     logger.debug("Known directories are: %s" % KNOWN_DIRECTORIES)
