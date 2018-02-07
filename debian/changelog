@@ -1,3 +1,9 @@
+folder-color-switcher (1.1.8) tara; urgency=medium
+
+  * Simplify packaging
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 07 Feb 2018 13:25:31 +0000
+
 folder-color-switcher (1.1.7) sylvia; urgency=medium
 
   * l10n: Update translations
