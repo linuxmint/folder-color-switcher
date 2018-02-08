@@ -10,6 +10,6 @@ Conflicts: nemo-folder-color-switcher, caja-folder-switcher
 Replaces: nemo-folder-color-switcher, caja-folder-color-switcher
 Section: utils
 Priority: extra
-Depends: python-nemo, nemo, ${python:Depends}
+Depends: ${python:Depends}
 Description: Change a folder color
  Change folder colors
