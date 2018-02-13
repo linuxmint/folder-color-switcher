@@ -1,3 +1,9 @@
+folder-color-switcher (1.2.1) tara; urgency=medium
+
+  * Packaging: Fix typo
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 13 Feb 2018 10:36:11 +0000
+
 folder-color-switcher (1.2.0) tara; urgency=medium
 
   * Packaging: Replace conflicts with breaks
