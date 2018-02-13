@@ -1,3 +1,9 @@
+folder-color-switcher (1.2.0) tara; urgency=medium
+
+  * Packaging: Replace conflicts with breaks
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 13 Feb 2018 10:31:40 +0000
+
 folder-color-switcher (1.1.9) tara; urgency=medium
 
   * Fix mistake in previous commit
