@@ -6,7 +6,7 @@ Build-Depends: python-distutils-extra, debhelper (>=7)
 
 Package: folder-color-switcher
 Architecture: all
-Breaks: nemo-folder-color-switcher, caja-folder-switcher
+Breaks: nemo-folder-color-switcher, caja-folder-color-switcher
 Replaces: nemo-folder-color-switcher, caja-folder-color-switcher
 Section: utils
 Priority: extra
