@@ -248,6 +248,12 @@ class ChangeFolderColorBase(object):
 
 
 css_colors = """
+.folder-color-switcher-button,
+.folder-color-switcher-restore {
+    min-height: 16px;
+    min-width: 16px;
+    padding: 0;
+}
 .folder-color-switcher-button {
     border-style: solid;
     border-width: 1px;
