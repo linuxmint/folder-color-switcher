@@ -96,6 +96,9 @@ class Theme(object):
         self.base_name = base_name
         self.color_variant = color_variant
 
+        self.inherited_themes_cache = None
+        self.supported_theme_colors = None
+
     def __str__(self):
         if self.color_variant:
             return "%s-%s" % (self.base_name, self.color_variant)
@@ -133,22 +136,27 @@ class Theme(object):
         return os.path.isfile(path)
 
     def inherited_themes(self):
-        logger.debug('Importing config parser...')
-        import ConfigParser
-        parser = ConfigParser.RawConfigParser()
-        index_theme_path = self.get_index_theme_path()
-        try:
-            logger.debug('Trying to read index.theme at %s' % index_theme_path)
-            parser.read(index_theme_path)
-            inherits_str = parser.get('Icon Theme', 'Inherits')
-            logger.debug('Theme %s inherits %s' % (self, inherits_str))
+        if self.inherited_themes_cache == None:
             result = []
-            for parent in inherits_str.split(","):
-                result.append(Theme.from_theme_name(parent))
-            return result
-        except:
-            logger.info('Could not read index.theme for theme %s' % self)
-            return []
+
+            logger.debug('Importing config parser...')
+            import ConfigParser
+            parser = ConfigParser.RawConfigParser()
+            index_theme_path = self.get_index_theme_path()
+            try:
+                logger.debug('Trying to read index.theme at %s' % index_theme_path)
+                parser.read(index_theme_path)
+                inherits_str = parser.get('Icon Theme', 'Inherits')
+                logger.debug('Theme %s inherits %s' % (self, inherits_str))
+
+                for parent in inherits_str.split(","):
+                    result.append(Theme.from_theme_name(parent))
+            except:
+                logger.info('Could not read index.theme for theme %s' % self)
+                result = []
+
+            self.inherited_themes_cache = result
+        return self.inherited_themes_cache
 
     def get_ancestor_defining_folder_svg(self, directory=None):
         if self.has_svg_for_folder(directory):
@@ -188,18 +196,22 @@ class Theme(object):
             return None
 
     def get_supported_colors(self, paths):
-        supported_colors = []
+        if self.supported_theme_colors == None:
+            supported_colors = []
 
-        for color in COLORS:
-            color_supported = True
-            for directory in paths:
-                icon_path = self.find_folder_icon(color, directory)
-                if not icon_path:
-                    color_supported = False
-                    break
-            if color_supported:
-                supported_colors.append(color)
-        return supported_colors
+            for color in COLORS:
+                color_supported = True
+                for directory in paths:
+                    icon_path = self.find_folder_icon(color, directory)
+                    if not icon_path:
+                        color_supported = False
+                        break
+                if color_supported:
+                    supported_colors.append(color)
+
+            self.supported_theme_colors = supported_colors
+
+        return self.supported_theme_colors
 
     @property
     def color(self):
@@ -282,6 +294,10 @@ Gtk.StyleContext.add_provider_for_screen (screen, provider, 600) # GTK_STYLE_PRO
 class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvider):
     def __init__(self):
         logger.info("Initializing folder-color-switcher extension...")
+        locale.setlocale(locale.LC_ALL, '')
+        gettext.bindtextdomain('folder-color-switcher')
+        gettext.textdomain('folder-color-switcher')
+
         self.SEPARATOR = u'\u2015' * 4
         self.settings = Gio.Settings.new("org.cinnamon.desktop.interface")
         self.settings.connect("changed::icon-theme", self.on_theme_changed)
@@ -301,10 +317,6 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
         if not items_selected:
             # No items selected
             return
-
-        locale.setlocale(locale.LC_ALL, '')
-        gettext.bindtextdomain('folder-color-switcher')
-        gettext.textdomain('folder-color-switcher')
 
         paths = []
         for item in items_selected:
