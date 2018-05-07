@@ -61,21 +61,9 @@ COLORS = collections.OrderedDict ([
            ])
 
 class Theme(object):
-    KNOWN_DIRECTORIES = {
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_DESKTOP): 'user-desktop.svg',
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOCUMENTS): 'folder-documents.svg',
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_DOWNLOAD): 'folder-download.svg',
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_MUSIC): 'folder-music.svg',
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_PICTURES): 'folder-pictures.svg',
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_PUBLIC_SHARE): 'folder-publicshare.svg',
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_TEMPLATES): 'folder-templates.svg',
-        GLib.get_user_special_dir(GLib.USER_DIRECTORY_VIDEOS): 'folder-video.svg',
-        GLib.get_home_dir(): 'folder-home.svg',
-    }
-    logger.debug("Known directories are: %s" % KNOWN_DIRECTORIES)
-
     KNOWN_THEMES = {
         'Mint-X': 'Green',
+        'Mint-Y': 'Green',
         'Mint-X-Dark': 'Green',
         'Rave-X-CX': 'Beige',
         'Faience': 'Beige',
@@ -91,8 +79,26 @@ class Theme(object):
         self.base_name = base_name
         self.color_variant = color_variant
 
+        self.base_path = str("/usr/share/icons/%s/" % self)
+
+        self.variants = {}
+        self.default_folder_file = None
         self.inherited_themes_cache = None
         self.supported_theme_colors = None
+
+        self.KNOWN_DIRECTORIES = {
+            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP): 'user-desktop',
+            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS): 'folder-documents',
+            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD): 'folder-download',
+            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_MUSIC): 'folder-music',
+            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES): 'folder-pictures',
+            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PUBLIC_SHARE): 'folder-publicshare',
+            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_TEMPLATES): 'folder-templates',
+            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS): 'folder-video',
+            GLib.get_home_dir(): 'folder-home',
+        }
+
+        self.discover_image_support()
 
     def __str__(self):
         if self.color_variant:
@@ -115,20 +121,54 @@ class Theme(object):
         base_name, color_variant = Theme.parse(theme_str)
         return Theme(base_name, color_variant)
 
-    @property
-    def base_path(self):
-        return "/usr/share/icons/%s/" % self
+    def get_variant(self, base_name, color):
+        if color is not None:
+            key = "%s-%s" % (base_name, color)
+        else:
+            key = "%s" % base_name
+
+        if key in self.variants.keys():
+            return self.variants[key]
+        else:
+            variant = Theme(base_name, color)
+            self.variants[key] = variant
+            return variant
+
+    def discover_image_support(self):
+        logger.debug("Discovering image support for theme %s" % self)
+
+        for key in self.KNOWN_DIRECTORIES.keys():
+            found = False
+
+            for ext in (".png", ".svg"):
+                path = os.path.join(self.base_path, "places", "48", self.KNOWN_DIRECTORIES[key] + ext)
+
+                if os.path.isfile(path):
+                    logger.debug("Found icon for '%s' at '%s'" % (key, path))
+                    self.KNOWN_DIRECTORIES[key] = path
+                    found = True
+                    break
+
+            if not found:
+                self.KNOWN_DIRECTORIES[key] = None
+
+        for ext in (".png", ".svg"):
+            path = os.path.join(self.base_path, "places", "48", "folder" + ext)
+
+            if os.path.isfile(path):
+                logger.debug("Found generic folder icon at '%s'" % (path,))
+
+                self.default_folder_file = path
+                break
 
     def get_folder_icon_path(self, directory=None):
-        icon_name = Theme.KNOWN_DIRECTORIES.get(directory, 'folder.svg')
-        return os.path.join(self.base_path, "places/48/", icon_name)
+        return self.KNOWN_DIRECTORIES.get(directory, self.default_folder_file)
 
     def get_index_theme_path(self):
         return os.path.join(self.base_path, "index.theme")
 
-    def has_svg_for_folder(self, directory=None):
-        path = self.get_folder_icon_path(directory)
-        return os.path.isfile(path)
+    def has_icon_for_folder(self, directory=None):
+        return self.get_folder_icon_path(directory) is not None
 
     def inherited_themes(self):
         if self.inherited_themes_cache == None:
@@ -154,7 +194,7 @@ class Theme(object):
         return self.inherited_themes_cache
 
     def get_ancestor_defining_folder_svg(self, directory=None):
-        if self.has_svg_for_folder(directory):
+        if self.has_icon_for_folder(directory):
             return self
         for theme in self.inherited_themes():
             ancestor = theme.get_ancestor_defining_folder_svg(directory)
@@ -168,10 +208,10 @@ class Theme(object):
             return self
         elif color == Theme.KNOWN_THEMES.get(self.base_name):
             # The base version of this theme implements the desired color
-            return Theme(self.base_name, None)
+            return self.get_variant(self.base_name, None)
         else:
             # The color belongs to a color variant
-            return Theme(self.base_name, color)
+            return self.get_variant(self.base_name, color)
 
     def find_folder_icon(self, color, directory=None):
         logger.debug("Trying to find icon for directory %s in %s for theme %s" % (directory, color, self))
@@ -179,16 +219,11 @@ class Theme(object):
         if not relevant_ancestor:
             logger.debug("Could not find ancestor defining SVG")
             return None
+
         logger.debug("Ancestor defining SVG is %s" % relevant_ancestor)
         colored_theme = relevant_ancestor.sibling(color)
-        icon_path = colored_theme.get_folder_icon_path(directory)
-        logger.debug("Checking for icon in %s" % icon_path)
-        if os.path.isfile(icon_path):
-            logger.debug("Icon found")
-            return icon_path
-        else:
-            logger.debug("No suitable icon found")
-            return None
+
+        return colored_theme.get_folder_icon_path(directory)
 
     def get_supported_colors(self, paths):
         if self.supported_theme_colors == None:
