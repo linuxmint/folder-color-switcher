@@ -1,3 +1,14 @@
+folder-color-switcher (1.2.2) tara; urgency=medium
+
+  [ JosephMcc ]
+  * nemo-extension: Fix the size of the folder color icons in the menu (#11)
+
+  [ Michael Webster ]
+  * *-folder-color-switcher.py: Cache the current theme's ancestor's and supported colors, to keep turnaround fast during file selection.
+  * Add Mint-Y to known supported themes, detect svg or png at theme initial loading, cache color variants for the current theme.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 10 May 2018 10:07:27 +0100
+
 folder-color-switcher (1.2.1) tara; urgency=medium
 
   * Packaging: Fix typo
