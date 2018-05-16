@@ -420,45 +420,12 @@ class FolderColorButton(Nemo.SimpleButton):
         super(FolderColorButton, self).__init__()
 
         c = self.get_style_context()
-
         if color == "restore":
-            c.add_class("folder-color-switcher-restore")
-            self.da = Gtk.DrawingArea.new()
-            self.da.set_size_request(12, 10)
-            self.set_image(self.da)
-            self.da.connect("draw", self.on_draw)
+            c.add_class("folder-color-switcher-button")
+            image = Gtk.Image(icon_name="edit-delete-symbolic")
+            self.set_image(image)
         else:
             c.add_class("folder-color-switcher-button")
             image = Gtk.Image()
             image.set_from_file("/usr/share/icons/hicolor/22x22/apps/folder-color-switcher-%s.png" % color.lower())
             self.set_image(image)
-
-    def on_draw(self, widget, cr):
-        width = widget.get_allocated_width ();
-        height = widget.get_allocated_height ();
-
-        grow = 0
-        line_width = 2.0
-
-        c = self.get_style_context()
-
-        if c.get_state() == Gtk.StateFlags.PRELIGHT:
-            grow = 1
-            line_width = 2.5
-
-        cr.save()
-
-        cr.set_source_rgb(0, 0, 0)
-        cr.set_line_width(line_width)
-        cr.set_line_cap(1)
-
-        cr.move_to(3 - grow, 2 - grow)
-        cr.line_to(width - 3 + grow, height - 2 + grow)
-        cr.move_to(3 - grow, height - 2 + grow)
-        cr.line_to(width - 3 + grow, 2 - grow)
-
-        cr.stroke()
-
-        cr.restore()
-
-        return False
