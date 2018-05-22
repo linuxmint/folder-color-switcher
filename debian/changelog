@@ -1,3 +1,13 @@
+folder-color-switcher (1.2.3) tara; urgency=medium
+
+  [ Michael Webster ]
+  * nemo-folder-color-switcher.py: Use an icon instead of drawing the restore button, this makes highlighting work properly like the color buttons.
+
+  [ Clement Lefebvre ]
+  * l10n: Update translations
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 22 May 2018 12:21:06 +0100
+
 folder-color-switcher (1.2.2) tara; urgency=medium
 
   [ JosephMcc ]
