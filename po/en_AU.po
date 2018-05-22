@@ -1,16 +1,16 @@
-# Welsh translation for linuxmint
-# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# English (Australia) translation for linuxmint
+# Copyright (c) 2018 Rosetta Contributors and Canonical Ltd 2018
 # This file is distributed under the same license as the linuxmint package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-15 21:45+0200\n"
-"PO-Revision-Date: 2014-11-06 11:39+0000\n"
-"Last-Translator: Rhoslyn Prys <rprys@yahoo.com>\n"
-"Language-Team: Welsh <cy@li.org>\n"
+"PO-Revision-Date: 2018-04-22 06:11+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: English (Australia) <en_AU@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,108 +20,108 @@ msgstr ""
 #: ../nemo-extensions/nemo-folder-color.py:172
 #: ../caja-extensions/caja-folder-color.py:136
 msgid "Sand"
-msgstr "Tywod"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:173
 #: ../caja-extensions/caja-folder-color.py:135
 msgid "Beige"
-msgstr "Llwydfelyn"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:174
 #: ../caja-extensions/caja-folder-color.py:149
 msgid "Yellow"
-msgstr "Melyn"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:175
 #: ../caja-extensions/caja-folder-color.py:143
 msgid "Orange"
-msgstr "Oren"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:176
 #: ../caja-extensions/caja-folder-color.py:139
 msgid "Brown"
-msgstr "Brown"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:177
 #: ../caja-extensions/caja-folder-color.py:146
 msgid "Red"
-msgstr "Coch"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:178
 #: ../caja-extensions/caja-folder-color.py:145
 msgid "Purple"
-msgstr "Porffor"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:179
 #: ../caja-extensions/caja-folder-color.py:144
 msgid "Pink"
-msgstr "Pinc"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:180
 #: ../caja-extensions/caja-folder-color.py:138
 msgid "Blue"
-msgstr "Glas"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:181
 #: ../caja-extensions/caja-folder-color.py:140
 msgid "Cyan"
-msgstr "Glas golau"
+msgstr ""
 
 #. Colors submenu
 #: ../nemo-extensions/nemo-folder-color.py:182
 #: ../caja-extensions/caja-folder-color.py:134
 msgid "Aqua"
-msgstr "Lliw dŵr"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:183
 #: ../caja-extensions/caja-folder-color.py:147
 msgid "Teal"
-msgstr "Gwyrddlas"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:184
 #: ../caja-extensions/caja-folder-color.py:141
 msgid "Green"
-msgstr "Gwyrdd"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:185
 #: ../caja-extensions/caja-folder-color.py:148
 msgid "White"
-msgstr "Gwyn"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:186
 #: ../caja-extensions/caja-folder-color.py:142
 msgid "Grey"
-msgstr "Llwyd"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:187
 #: ../caja-extensions/caja-folder-color.py:137
 msgid "Black"
-msgstr "Du"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:230
 msgid "Restores the color of the selected folders"
-msgstr "Bydd hyn yn adfer lliw'r ffolderi hyn"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:232
 msgid "Restores the color of the selected folder"
-msgstr "Bydd hyn yn adfer lliw'r ffolderi hyn"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:241
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr "Bydd hyn yn newid lliw'r ffolderi hyn i %s"
+msgstr ""
 
 #: ../nemo-extensions/nemo-folder-color.py:243
 #, python-format
 msgid "Changes the color of the selected folder to %s"
-msgstr "Bydd hyn yn newid lliw'r ffolderi hyn i %s"
+msgstr ""
 
 #. Main menu [1 or +1 folder(s)]
 #: ../caja-extensions/caja-folder-color.py:129
 msgid "Change color"
-msgstr "Newid lliw"
+msgstr ""
 
 #. Restore
 #: ../caja-extensions/caja-folder-color.py:173
 msgid "Default"
-msgstr "Rhagosodedig"
+msgstr ""
