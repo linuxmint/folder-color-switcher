@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # Folder Color 0.0.11
 # Copyright (C) 2012-2014 Marcos Alvarez Costales https://launchpad.net/~costales
@@ -16,7 +17,7 @@
 # along with Folder Color; if not, see http://www.gnu.org/licenses
 # for more information.
 
-import os, urllib, gettext, locale, urlparse, collections
+import os, gettext, locale, urllib.parse, collections
 import subprocess
 from gi.repository import Caja, GObject, Gio, GLib
 _ = gettext.gettext
@@ -94,7 +95,7 @@ class Theme(object):
             GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES): 'folder-pictures',
             GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PUBLIC_SHARE): 'folder-publicshare',
             GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_TEMPLATES): 'folder-templates',
-            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS): 'folder-video',
+            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS): 'folder-videos',
             GLib.get_home_dir(): 'folder-home',
         }
 
@@ -264,7 +265,7 @@ class ChangeFolderColorBase(object):
                 continue
 
             # Get object
-            path = urllib.unquote(item.get_uri()[7:])
+            path = urllib.parse.unquote(item.get_uri()[7:])
             directory = item.get_location()
             info = directory.query_info('metadata::custom-icon', 0, None)
 
@@ -324,7 +325,7 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvide
 
             item_uri = item.get_uri()
             logger.debug('URI "%s" is in selection', item_uri)
-            uri_tuple = urlparse.urlparse(item_uri)
+            uri_tuple = urllib.parse.urlparse(item_uri)
             # GNOME can only handle "file" URI scheme
             # break if the file URI has weired components (such as params)
             if uri_tuple[0] != 'file' or uri_tuple[1] or uri_tuple[3] or uri_tuple[4] or uri_tuple[5]:
