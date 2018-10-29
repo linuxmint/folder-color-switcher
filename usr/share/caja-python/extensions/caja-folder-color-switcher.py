@@ -94,7 +94,7 @@ class Theme(object):
             GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES): 'folder-pictures',
             GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PUBLIC_SHARE): 'folder-publicshare',
             GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_TEMPLATES): 'folder-templates',
-            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS): 'folder-video',
+            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS): 'folder-videos',
             GLib.get_home_dir(): 'folder-home',
         }
 
