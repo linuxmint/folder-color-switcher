@@ -327,7 +327,7 @@ provider.load_from_data(css_colors)
 screen = Gdk.Screen.get_default();
 Gtk.StyleContext.add_provider_for_screen (screen, provider, 600) # GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
 
-class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvider):
+class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvider, Nemo.NameAndDescProvider):
     def __init__(self):
         logger.info("Initializing folder-color-switcher extension...")
         locale.setlocale(locale.LC_ALL, '')
@@ -347,6 +347,9 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
 
     def get_background_items(self, window, current_folder):
         return
+
+    def get_name_and_desc(self):
+        return [("Folder Color Switcher:::Allows you to change folder colors from the context menu under supported icon themes")]
 
     # Nemo invoke this function in its startup > Then, create menu entry
     def get_file_items(self, window, items_selected):
