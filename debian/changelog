@@ -1,3 +1,10 @@
+folder-color-switcher (1.2.5) tessa; urgency=medium
+
+  [ Michael Webster ]
+  * nemo-folder-color-switcher.py: Add a name and description to display in the plugin manager.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 06 Dec 2018 13:33:15 +0000
+
 folder-color-switcher (1.2.4) tessa; urgency=medium
 
   [ Clement Lefebvre ]
