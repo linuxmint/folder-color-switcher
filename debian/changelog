@@ -1,3 +1,9 @@
+folder-color-switcher (1.2.6) tessa; urgency=medium
+
+  * l10n: Update translations
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 11 Dec 2018 14:52:49 +0000
+
 folder-color-switcher (1.2.5) tessa; urgency=medium
 
   [ Michael Webster ]
