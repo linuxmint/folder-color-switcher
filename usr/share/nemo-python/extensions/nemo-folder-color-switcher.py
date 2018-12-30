@@ -231,9 +231,8 @@ class Theme(object):
             logger.info('Could not read index.theme for theme %s' % self)
 
     def get_default_view_icon_size(self):
-        default_view = self.get_default_view()
+        default_view = ChangeFolderColorBase.default_view
         zoom_lvl_index = self.get_default_view_zoom_level(default_view)
-
         return self.ZOOM_LEVEL_ICON_SIZES[default_view][zoom_lvl_index]
 
     def get_current_view_icon_size(self):
@@ -246,7 +245,7 @@ class Theme(object):
             match = re.search("OAFIID:Nemo_File_Manager_(\\w+)_View", meta_view)
             view = match.group(1).lower() + "-view"
         else:
-            view = self.get_default_view()
+            view = ChangeFolderColorBase.default_view
 
         if view in self.ZOOM_LEVEL_ICON_SIZES.keys():
             # the zoom level is store as string ('0', ... , '6')
@@ -291,10 +290,6 @@ class Theme(object):
 
         logger.debug("Best available icon size is: %i", best_size)
         return best_size
-
-    def get_default_view(self):
-        nemo_prefs = Gio.Settings.new("org.nemo.preferences")
-        return nemo_prefs.get_string("default-folder-viewer")
 
     def get_default_view_zoom_level(self, view="icon-view"):
         zoom_lvl_string = Gio.Settings.new("org.nemo." + view).get_string("default-zoom-level")
@@ -408,6 +403,7 @@ class Theme(object):
 class ChangeFolderColorBase(object):
     current_directory = None
     ignore_view_metadata = False
+    default_view = None
 
     def update_theme(self, theme_str):
         logger.info("Current icon theme: %s", theme_str)
@@ -492,20 +488,25 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
 
         self.nemo_settings = Gio.Settings.new("org.nemo.preferences")
         self.nemo_settings.connect("changed::ignore-view-metadata", self.on_ignore_view_metadata_changed)
+        self.nemo_settings.connect("changed::default-folder-viewer", self.on_default_view_changed)
         self.on_ignore_view_metadata_changed(None)
+        self.on_default_view_changed(None)
 
     def on_theme_changed(self, settings, key):
         self.update_theme(self.settings.get_string("icon-theme"))
 
     def on_ignore_view_metadata_changed(self, settings, key="ignore-view-metadata"):
-        ChangeColorFolder.ignore_view_metadata = self.nemo_settings.get_boolean(key)
+        ChangeFolderColorBase.ignore_view_metadata = self.nemo_settings.get_boolean(key)
+
+    def on_default_view_changed(self, settings, key="default-folder-viewer"):
+        ChangeFolderColorBase.default_view = self.nemo_settings.get_string(key)
 
     def menu_activate_cb(self, menu, color, folders):
         self.set_folder_icons(color, folders)
 
     def get_background_items(self, window, current_folder):
         logger.debug("Current folder is: " + current_folder.get_name())
-        ChangeColorFolder.current_directory = current_folder.get_location()
+        ChangeFolderColorBase.current_directory = current_folder.get_location()
         return
 
     def get_name_and_desc(self):
