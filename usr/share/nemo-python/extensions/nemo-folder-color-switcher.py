@@ -238,8 +238,8 @@ class Theme(object):
 
     def get_current_view_icon_size(self):
         # get the folder where we are currently in
-        dir = ChangeColorFolder.current_directory
-        info = dir.query_info('metadata::*', 0, None)
+        current_dir = ChangeColorFolder.current_directory
+        info = current_dir.query_info('metadata::*', 0, None)
         meta_view = info.get_attribute_string('metadata::nemo-default-view')
 
         if meta_view:
