@@ -26,7 +26,7 @@ except:
 	# Python 3 (Mint 19.1)
 	import configparser
 
-from gi.repository import Nemo, GObject, Gio, GLib, Gtk, Gdk, GdkPixbuf, cairo
+from gi.repository import Nemo, GObject, Gio, GLib, Gtk, Gdk
 _ = gettext.gettext
 P_ = gettext.ngettext
 
