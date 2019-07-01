@@ -1,3 +1,10 @@
+folder-color-switcher (1.2.7) tina; urgency=medium
+
+  [ okaestne ]
+  * Fixes for Mint 19.1 / Nemo 4 and Mint-Y (#16)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 01 Jul 2019 10:33:37 +0200
+
 folder-color-switcher (1.2.6) tessa; urgency=medium
 
   * l10n: Update translations
