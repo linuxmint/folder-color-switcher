@@ -223,15 +223,15 @@ class Theme(object):
                 search = re.search("^places/(\\d+)(@2x)*$",section)
 
                 if search:
-                    type = parser.get(section, "Type")
+                    icon_type = parser.get(section, "Type")
                     try:
-                        scale = parser.get(section, "Scale")
+                        icon_scale = parser.get(section, "Scale")
                     except:
-                        scale = 1
+                        icon_scale = 1
 
-                    icon_size = int(search.group(1)) * int(scale)
-                    logger.debug("Discovered theme icon size: %s, type: %s, scale: %s, section: %s", icon_size, type, scale, section)
-                    self.supported_icon_sizes[icon_size] = [type, section]
+                    icon_size = int(search.group(1)) * int(icon_scale)
+                    logger.debug("Discovered theme icon size: %s, type: %s, scale: %s, section: %s", icon_size, icon_type, icon_scale, section)
+                    self.supported_icon_sizes[icon_size] = [icon_type, section]
 
         except:
             logger.info('Could not read index.theme for theme %s' % self)
