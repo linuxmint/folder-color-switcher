@@ -291,10 +291,6 @@ class ChangeFolderColorBase(object):
 class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvider):
     def __init__(self):
         logger.info("Initializing folder-color-switcher extension...")
-        locale.setlocale(locale.LC_ALL, '')
-        gettext.bindtextdomain('folder-color-switcher')
-        gettext.textdomain('folder-color-switcher')
-
         self.SEPARATOR = u'\u2015' * 4
         self.settings = Gio.Settings.new("org.mate.interface")
         self.settings.connect("changed::icon-theme", self.on_theme_changed)
@@ -314,6 +310,10 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvide
         if not items_selected:
             # No items selected
             return
+
+        locale.setlocale(locale.LC_ALL, '')
+        gettext.bindtextdomain('folder-color-switcher')
+        gettext.textdomain('folder-color-switcher')
 
         paths = []
         for item in items_selected:
