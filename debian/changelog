@@ -1,3 +1,10 @@
+folder-color-switcher (1.2.9) tina; urgency=medium
+
+  * Remove extension icon
+  * Set gettext domain in get_file_items()
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 22 Jul 2019 14:09:57 +0200
+
 folder-color-switcher (1.2.8) tina; urgency=medium
 
   * l10n: Update translations
