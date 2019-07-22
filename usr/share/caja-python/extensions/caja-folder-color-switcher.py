@@ -337,7 +337,7 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvide
         supported_colors = self.theme.get_supported_colors(paths)
 
         if supported_colors:
-            top_menuitem = Caja.MenuItem(name='ChangeFolderColorMenu::Top', label=_("Change color"), tip='', icon='')
+            top_menuitem = Caja.MenuItem(name='ChangeFolderColorMenu::Top', label=_("Change color"))
             submenu = Caja.Menu()
             top_menuitem.set_submenu(submenu)
 
