@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-15 21:45+0200\n"
-"PO-Revision-Date: 2017-07-05 15:11+0000\n"
-"Last-Translator: Vikas Kumar Jha <Unknown>\n"
+"PO-Revision-Date: 2019-07-21 05:06+0000\n"
+"Last-Translator: Abhinav Jha <Unknown>\n"
 "Language-Team: Maithili <mai@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-07-10 08:27+0000\n"
-"X-Generator: Launchpad (build 19007)\n"
+"X-Launchpad-Export-Date: 2019-07-28 09:33+0000\n"
+"X-Generator: Launchpad (build 19010)\n"
 
 #: ../nemo-extensions/nemo-folder-color.py:172
 #: ../caja-extensions/caja-folder-color.py:136
@@ -25,7 +25,7 @@ msgstr "बाउल"
 #: ../nemo-extensions/nemo-folder-color.py:173
 #: ../caja-extensions/caja-folder-color.py:135
 msgid "Beige"
-msgstr ""
+msgstr "गहीर पीयर"
 
 #: ../nemo-extensions/nemo-folder-color.py:174
 #: ../caja-extensions/caja-folder-color.py:149
@@ -40,7 +40,7 @@ msgstr "नारंगी"
 #: ../nemo-extensions/nemo-folder-color.py:176
 #: ../caja-extensions/caja-folder-color.py:139
 msgid "Brown"
-msgstr ""
+msgstr "भूरा"
 
 #: ../nemo-extensions/nemo-folder-color.py:177
 #: ../caja-extensions/caja-folder-color.py:146
@@ -65,18 +65,18 @@ msgstr "नीला"
 #: ../nemo-extensions/nemo-folder-color.py:181
 #: ../caja-extensions/caja-folder-color.py:140
 msgid "Cyan"
-msgstr ""
+msgstr "सियान"
 
 #. Colors submenu
 #: ../nemo-extensions/nemo-folder-color.py:182
 #: ../caja-extensions/caja-folder-color.py:134
 msgid "Aqua"
-msgstr ""
+msgstr "पाइनक रङ्ग"
 
 #: ../nemo-extensions/nemo-folder-color.py:183
 #: ../caja-extensions/caja-folder-color.py:147
 msgid "Teal"
-msgstr ""
+msgstr "चैती"
 
 #: ../nemo-extensions/nemo-folder-color.py:184
 #: ../caja-extensions/caja-folder-color.py:141
@@ -91,7 +91,7 @@ msgstr "उज्जर"
 #: ../nemo-extensions/nemo-folder-color.py:186
 #: ../caja-extensions/caja-folder-color.py:142
 msgid "Grey"
-msgstr ""
+msgstr "धूसर"
 
 #: ../nemo-extensions/nemo-folder-color.py:187
 #: ../caja-extensions/caja-folder-color.py:137
@@ -100,21 +100,21 @@ msgstr "करिया"
 
 #: ../nemo-extensions/nemo-folder-color.py:230
 msgid "Restores the color of the selected folders"
-msgstr ""
+msgstr "चुनल फोल्डरक रङ्ग पुन: स्थपित करू"
 
 #: ../nemo-extensions/nemo-folder-color.py:232
 msgid "Restores the color of the selected folder"
-msgstr ""
+msgstr "चुनल फोल्डरक रङ्ग पुन: स्थपित करू"
 
 #: ../nemo-extensions/nemo-folder-color.py:241
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr ""
+msgstr "चुनल फोल्डरक रङ्ग %s मे परिवर्तित करू"
 
 #: ../nemo-extensions/nemo-folder-color.py:243
 #, python-format
 msgid "Changes the color of the selected folder to %s"
-msgstr ""
+msgstr "चुनल फोल्डरक रङ्ग %s मे परिवर्तित करू"
 
 #. Main menu [1 or +1 folder(s)]
 #: ../caja-extensions/caja-folder-color.py:129
@@ -124,4 +124,4 @@ msgstr "रंग बदलू"
 #. Restore
 #: ../caja-extensions/caja-folder-color.py:173
 msgid "Default"
-msgstr ""
+msgstr "पूर्वनिर्धारित"
