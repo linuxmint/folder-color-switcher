@@ -266,6 +266,7 @@ class Theme(object):
         return self.get_default_view_icon_size()
 
     def get_best_available_icon_size(self, desired_icon_size):
+	best_size = 0
         logger.debug("Finding the best available icon size for size: %i", desired_icon_size)
 
         # prefer SVG (scalable size) if available
