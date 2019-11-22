@@ -1,3 +1,10 @@
+folder-color-switcher (1.3.1) tricia; urgency=medium
+
+  [ Bruno Nocera Zanette ]
+  * Add support for scalable PNG icons ([size]@2x) (#19)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 22 Nov 2019 13:25:14 +0000
+
 folder-color-switcher (1.3.0) tina; urgency=medium
 
   * l10n: Update translations
