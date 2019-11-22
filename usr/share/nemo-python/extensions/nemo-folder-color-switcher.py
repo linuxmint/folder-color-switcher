@@ -191,7 +191,7 @@ class Theme(object):
             self.icon_path_cache[icon_size][key] = None
 
             for ext in (".png", ".svg"):
-                path = os.path.join(self.base_path, "places", str(icon_size), self.KNOWN_DIRECTORIES[key] + ext)
+                path = os.path.join(self.base_path, self.supported_icon_sizes[icon_size][1], self.KNOWN_DIRECTORIES[key] + ext)
 
                 if os.path.isfile(path):
                     logger.debug("Found icon for '%s' at '%s'" % (key, path))
@@ -200,7 +200,7 @@ class Theme(object):
 
         # usual directories
         for ext in (".png", ".svg"):
-            path = os.path.join(self.base_path, "places", str(icon_size), "folder" + ext)
+            path = os.path.join(self.base_path, self.supported_icon_sizes[icon_size][1], "folder" + ext)
 
             if os.path.isfile(path):
                 logger.debug("Found generic folder icon at '%s'" % path)
@@ -220,12 +220,18 @@ class Theme(object):
             parser.read(index_theme_path)
 
             for section in parser.sections():
-                search = re.search("^places/(\\d+)$",section)
+                search = re.search("^places/(\\d+)(@2x)*$",section)
 
                 if search:
-                    scalable = parser.get(section, "Type")
-                    logger.debug("Discovered theme icon size: %s, type: %s", search.group(1), scalable )
-                    self.supported_icon_sizes[int(search.group(1))] = scalable
+                    icon_type = parser.get(section, "Type")
+                    try:
+                        icon_scale = parser.get(section, "Scale")
+                    except:
+                        icon_scale = 1
+
+                    icon_size = int(search.group(1)) * int(icon_scale)
+                    logger.debug("Discovered theme icon size: %s, type: %s, scale: %s, section: %s", icon_size, icon_type, icon_scale, section)
+                    self.supported_icon_sizes[icon_size] = [icon_type, section]
 
         except:
             logger.info('Could not read index.theme for theme %s' % self)
@@ -268,9 +274,12 @@ class Theme(object):
     def get_best_available_icon_size(self, desired_icon_size):
         logger.debug("Finding the best available icon size for size: %i", desired_icon_size)
 
+        logger.debug("[get_best_available_icon_size] supported: %s",
+            self.supported_icon_sizes)
+
         # prefer SVG (scalable size) if available
         for size in self.supported_icon_sizes:
-            if self.supported_icon_sizes[size] == "Scalable":
+            if self.supported_icon_sizes[size][0] == "Scalable":
                 logger.debug("Best available icon size is: %i (scalable)", size)
                 return size
 
@@ -280,6 +289,7 @@ class Theme(object):
             return desired_icon_size
 
         # choose closest matching icon size
+        best_size = 128 # Just as a fallback
         best_abs = 9999
         for val in self.supported_icon_sizes:
             vabs = abs(val - desired_icon_size)
