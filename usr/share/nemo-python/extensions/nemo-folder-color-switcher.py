@@ -529,11 +529,13 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
             return
 
         directories = []
+        directories_selected = []
+
         for item in items_selected:
             # Only folders
             if not item.is_directory():
-                logger.info("A selected item is not a directory, exiting")
-                return
+                logger.info("A selected item is not a directory, skipping")
+                continue
 
             logger.debug('URI "%s" is in selection', item.get_uri())
 
@@ -543,14 +545,18 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
             directory = item.get_location()
             logger.debug('Valid path selected: "%s"', directory.get_path())
             directories.append(directory)
+            directories_selected.append(item)
+
+        if not directories_selected:
+            return
 
         supported_colors = self.theme.get_supported_colors(directories)
 
         if supported_colors:
             logger.debug("At least one color supported: creating menu entry")
             item = Nemo.MenuItem(name='ChangeFolderColorMenu::Top')
-            item.set_widget_a(self.generate_widget(supported_colors, items_selected))
-            item.set_widget_b(self.generate_widget(supported_colors, items_selected))
+            item.set_widget_a(self.generate_widget(supported_colors, directories_selected))
+            item.set_widget_b(self.generate_widget(supported_colors, directories_selected))
             return Nemo.MenuItem.new_separator('ChangeFolderColorMenu::TopSep'),   \
                    item,                                                           \
                    Nemo.MenuItem.new_separator('ChangeFolderColorMenu::BotSep')
