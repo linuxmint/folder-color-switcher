@@ -16,7 +16,7 @@
 # along with Folder Color; if not, see http://www.gnu.org/licenses
 # for more information.
 
-import os, urllib, gettext, locale, urlparse, collections
+import os, urllib, gettext, locale, collections
 import subprocess
 from gi.repository import Caja, GObject, Gio, GLib
 _ = gettext.gettext
@@ -291,6 +291,10 @@ class ChangeFolderColorBase(object):
 class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvider):
     def __init__(self):
         logger.info("Initializing folder-color-switcher extension...")
+        locale.setlocale(locale.LC_ALL, '')
+        gettext.bindtextdomain('folder-color-switcher')
+        gettext.textdomain('folder-color-switcher')
+
         self.SEPARATOR = u'\u2015' * 4
         self.settings = Gio.Settings.new("org.mate.interface")
         self.settings.connect("changed::icon-theme", self.on_theme_changed)
@@ -311,32 +315,32 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvide
             # No items selected
             return
 
-        locale.setlocale(locale.LC_ALL, '')
-        gettext.bindtextdomain('folder-color-switcher')
-        gettext.textdomain('folder-color-switcher')
+        directories = []
+        directories_selected = []
 
-        paths = []
         for item in items_selected:
             # Only folders
             if not item.is_directory():
-                logger.info("A selected item is not a directory, exiting")
+                logger.info("A selected item is not a directory, skipping")
+                continue
+
+            logger.debug('URI "%s" is in selection', item.get_uri())
+
+            if item.get_uri_scheme() != 'file':
                 return
 
-            item_uri = item.get_uri()
-            logger.debug('URI "%s" is in selection', item_uri)
-            uri_tuple = urlparse.urlparse(item_uri)
-            # GNOME can only handle "file" URI scheme
-            # break if the file URI has weired components (such as params)
-            if uri_tuple[0] != 'file' or uri_tuple[1] or uri_tuple[3] or uri_tuple[4] or uri_tuple[5]:
-                logger.info("A selected item as a weired URI, exiting")
-                return
-            path = uri_tuple[2]
-            logger.debug('Valid path selected: "%s"', path)
-            paths.append(path)
+            directory = item.get_location()
+            logger.debug('Valid path selected: "%s"', directory.get_path())
+            directories.append(directory)
+            directories_selected.append(item)
 
-        supported_colors = self.theme.get_supported_colors(paths)
+        if not directories_selected:
+            return
+
+        supported_colors = self.theme.get_supported_colors(directories)
 
         if supported_colors:
+            logger.debug("At least one color supported: creating menu entry")
             top_menuitem = Caja.MenuItem(name='ChangeFolderColorMenu::Top', label=_("Change color"))
             submenu = Caja.Menu()
             top_menuitem.set_submenu(submenu)
@@ -345,7 +349,7 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvide
                 name = ''.join(['ChangeFolderColorMenu::"', color, '"'])
                 label = _(color)
                 item = Caja.MenuItem(name=name, label=label, icon='folder-color-switcher-%s' % color.lower())
-                item.connect('activate', self.menu_activate_cb, color, items_selected)
+                item.connect('activate', self.menu_activate_cb, color, directories_selected)
                 submenu.append_item(item)
 
             # Separator
@@ -354,7 +358,7 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvide
 
             # Restore
             item_restore = Caja.MenuItem(name='ChangeFolderColorMenu::Restore', label=_("Default"))
-            item_restore.connect('activate', self.menu_activate_cb, None, items_selected)
+            item_restore.connect('activate', self.menu_activate_cb, None, directories_selected)
             submenu.append_item(item_restore)
 
             return top_menuitem,
