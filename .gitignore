@@ -1,0 +1,7 @@
+/debian/.debhelper/
+/debian/files
+/debian/folder-color-switcher/
+/debian/*.log
+/debian/*.substvars
+
+usr/share/locale/
