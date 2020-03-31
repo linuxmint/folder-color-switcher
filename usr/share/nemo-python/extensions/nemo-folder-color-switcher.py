@@ -17,14 +17,10 @@
 # along with Folder Color; if not, see http://www.gnu.org/licenses
 # for more information.
 
-import os, gettext, locale, collections, re
-import subprocess
-try:
-	# Python2 (Mint 19)
-	import ConfigParser as configparser
-except:
-	# Python 3 (Mint 19.1)
-	import configparser
+import os, gettext, locale, collections, re, subprocess, gi
+
+gi.require_version('Gtk', '3.0')
+gi.require_version('Nemo', '3.0')
 
 from gi.repository import Nemo, GObject, Gio, GLib, Gtk, Gdk
 _ = gettext.gettext
