@@ -246,6 +246,13 @@ class ChangeFolderColorBase(object):
 
     def get_current_view_icon_size(self):
         # get the folder where we are currently in
+        if not self.current_directory \
+                or self.current_directory.get_uri_scheme() == 'x-nemo-desktop':
+            # when selecting files on the desktop -> special URI ('x-nemo-desktop:///')
+            # we could somehow read the icon size level in ~/.config/desktop-metadata and map it.
+            # but as workaround use the default size
+            return 64
+
         info = self.current_directory.query_info('metadata::*', 0, None)
         meta_view = info.get_attribute_string('metadata::nemo-default-view')
 
