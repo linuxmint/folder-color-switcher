@@ -352,8 +352,6 @@ class ChangeFolderColor(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
         gettext.bindtextdomain('folder-color-switcher')
         gettext.textdomain('folder-color-switcher')
 
-        self.SEPARATOR = u'\u2015' * 4
-
     def menu_activate_cb(self, menu, color, folders):
         self.set_folder_colors(folders, color)
 
