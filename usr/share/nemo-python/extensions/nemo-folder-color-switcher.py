@@ -283,7 +283,7 @@ class ChangeFolderColorBase(object):
     def set_folder_colors(self, folders, color):
         if color:
             icon_size = self.get_desired_icon_size()
-            default_folder_icon_uri = self.themeset.get_icon_uri_for_color_size_and_scale('folder', color, icon_size, 1)
+            default_folder_icon_uri = self.themeset.get_icon_uri_for_color_size_and_scale('folder', color, icon_size, self.scale_factor)
 
             if not default_folder_icon_uri:
                 return
@@ -301,7 +301,7 @@ class ChangeFolderColorBase(object):
                 icon_name = self.get_folder_icon_name(path)
 
                 if icon_name != 'folder':
-                    icon_uri = self.themeset.get_icon_uri_for_color_size_and_scale(icon_name, color, icon_size, 1)
+                    icon_uri = self.themeset.get_icon_uri_for_color_size_and_scale(icon_name, color, icon_size, self.scale_factor)
 
                 if icon_uri:
                     directory.set_attribute_string('metadata::custom-icon', icon_uri, 0, None)
@@ -357,6 +357,8 @@ class ChangeFolderColor(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
         logger.debug("Known themes are: %s", ', '.join(list(ColoredIconThemeSet.KNOWN_THEMES.keys())))
 
     def menu_activate_cb(self, menu, color, folders):
+        # get scale factor from the clicked menu widget (for Hi-DPI)
+        self.scale_factor = menu.get_scale_factor()
         self.set_folder_colors(folders, color)
 
     def get_background_items(self, window, current_folder):
