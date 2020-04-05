@@ -296,7 +296,6 @@ class ChangeFolderColorBase(object):
             # get Gio.File object
             directory = folder.get_location()
             path = directory.get_path()
-            info = directory.query_info('metadata::custom-icon', 0, None)
 
             if color:
                 icon_uri = default_folder_icon_uri
@@ -306,13 +305,10 @@ class ChangeFolderColorBase(object):
                     icon_uri = self.themeset.get_icon_uri_for_color_size_and_scale(icon_name, color, icon_size, 1)
 
                 if icon_uri:
-                    info.set_attribute_string('metadata::custom-icon', icon_uri)
+                    directory.set_attribute_string('metadata::custom-icon', icon_uri, 0, None)
             else:
                 # A color of None unsets the custom-icon
-                info.set_attribute('metadata::custom-icon', Gio.FileAttributeType.INVALID, 0)
-
-            # Write changes
-            directory.set_attributes_from_info(info, 0, None)
+                directory.set_attribute('metadata::custom-icon', Gio.FileAttributeType.INVALID, 0, 0, None)
 
             # Touch the directory to make Nemo/Caja re-render its icons
             subprocess.call(["touch", path])
