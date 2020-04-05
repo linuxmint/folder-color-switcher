@@ -202,7 +202,7 @@ class ChangeFolderColorBase(object):
     }
 
     def __init__(self):
-        self.current_directory = None
+        self.parent_directory = None
 
         # view preferences
         self.ignore_view_metadata = False
@@ -245,14 +245,10 @@ class ChangeFolderColorBase(object):
 
     def get_current_view_icon_size(self):
         # get the folder where we are currently in
-        if not self.current_directory \
-                or self.current_directory.get_uri_scheme() == 'x-nemo-desktop':
-            # when selecting files on the desktop -> special URI ('x-nemo-desktop:///')
-            # we could somehow read the icon size level in ~/.config/desktop-metadata and map it.
-            # but as workaround use the default size
+        if not self.parent_directory:
             return 64
 
-        info = self.current_directory.query_info('metadata::*', 0, None)
+        info = self.parent_directory.get_location().query_info('metadata::*', 0, None)
         meta_view = info.get_attribute_string('metadata::nemo-default-view')
 
         if meta_view:
@@ -273,7 +269,7 @@ class ChangeFolderColorBase(object):
                 zoom_level = int(meta_zoom_lvl)
 
             icon_size = self.ZOOM_LEVEL_ICON_SIZES[view][zoom_level]
-            logger.debug("Icon size for the current view is: %i" % icon_size)
+            logger.debug("Icon size for the current view is: %i", icon_size)
             return icon_size
 
         logger.debug("falling back to defaults")
@@ -281,6 +277,9 @@ class ChangeFolderColorBase(object):
 
 
     def set_folder_colors(self, folders, color):
+        self.parent_directory = folders[0].get_parent_info()
+        logger.debug("Parent folder is: %s", self.parent_directory.get_uri())
+
         if color:
             icon_size = self.get_desired_icon_size()
             default_folder_icon_uri = self.themeset.get_icon_uri_for_color_size_and_scale('folder', color, icon_size, self.scale_factor)
@@ -362,8 +361,6 @@ class ChangeFolderColor(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
         self.set_folder_colors(folders, color)
 
     def get_background_items(self, window, current_folder):
-        logger.debug("Current folder is: " + current_folder.get_name())
-        self.current_directory = current_folder.get_location()
         return
 
     def get_name_and_desc(self):
