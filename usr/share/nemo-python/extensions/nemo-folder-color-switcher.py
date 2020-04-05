@@ -85,7 +85,6 @@ class ColoredIconThemeSet:
         'mate': 'Beige',
         'oxygen': 'Blue'
     })
-    logger.debug("Known themes are: %s" % KNOWN_THEMES)
 
     def __init__(self):
         self.availableColoredIconThemes = {}
@@ -161,7 +160,7 @@ class ColoredIconThemeSet:
                 logger.debug("Found icon at URI: %s", uri)
                 return uri
 
-        logger.warning('No icon "%s" found for color "%s", size %i and scale %i', icon_name, color, size, scale)
+        logger.debug('No icon "%s" found for color "%s", size %i and scale %i', icon_name, color, size, scale)
         return None
 
 
@@ -354,6 +353,8 @@ class ChangeFolderColor(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
         locale.setlocale(locale.LC_ALL, '')
         gettext.bindtextdomain('folder-color-switcher')
         gettext.textdomain('folder-color-switcher')
+
+        logger.debug("Known themes are: %s", ', '.join(list(ColoredIconThemeSet.KNOWN_THEMES.keys())))
 
     def menu_activate_cb(self, menu, color, folders):
         self.set_folder_colors(folders, color)
