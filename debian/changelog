@@ -1,3 +1,13 @@
+folder-color-switcher (1.4.0) ulyana; urgency=medium
+
+  [ okaestne ]
+  * add .gitignore
+
+  [ Michael Webster ]
+  * debian: Remove python2 package dep, update a few other things to quiet down the build.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 09 Apr 2020 13:00:40 +0100
+
 folder-color-switcher (1.3.2) tricia; urgency=medium
 
   * l10n: Update translations
