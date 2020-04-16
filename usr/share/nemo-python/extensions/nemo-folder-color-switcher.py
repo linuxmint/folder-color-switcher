@@ -134,8 +134,7 @@ class ColoredIconThemeSet:
 
         for color in COLORS:
             it = Gtk.IconTheme.new()
-            it.set_custom_theme(
-            	'%s-%s' % (self.currentBaseIconThemeName, color))
+            it.set_custom_theme('%s-%s' % (self.currentBaseIconThemeName, color))
 
             # check if the default 'folder' icon is available for the given color (size: 32).
             # HACK: to ignore fallback icons, check that the base theme name is included in the icon path
