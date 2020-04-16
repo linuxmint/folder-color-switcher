@@ -17,7 +17,7 @@
 # along with Folder Color; if not, see http://www.gnu.org/licenses
 # for more information.
 
-import os, gettext, locale, collections, re, subprocess, gi
+import os, gettext, locale, collections, re, gi
 
 gi.require_version('Gtk', '3.0')
 gi.require_version('Nemo', '3.0')
@@ -307,8 +307,8 @@ class ChangeFolderColorBase(object):
                 # A color of None unsets the custom-icon
                 directory.set_attribute('metadata::custom-icon', Gio.FileAttributeType.INVALID, 0, 0, None)
 
-            # Touch the directory to make Nemo/Caja re-render its icons
-            subprocess.call(["touch", path])
+            # update the directory's modified date to make Nemo/Caja re-render its icon
+            os.utime(path, None)
 
 
 css_colors = b"""
