@@ -221,7 +221,8 @@ class ChangeFolderColorBase(object):
     def on_default_view_changed(self, settings, key="default-folder-viewer"):
         self.default_view = self.nemo_settings.get_string(key)
 
-    def get_default_view_zoom_level(self, view="icon-view"):
+    @staticmethod
+    def get_default_view_zoom_level(view="icon-view"):
         zoom_lvl_string = Gio.Settings.new("org.nemo.%s" % view).get_string("default-zoom-level")
         return ChangeFolderColorBase.ZOOM_LEVELS[zoom_lvl_string]
 
@@ -229,8 +230,8 @@ class ChangeFolderColorBase(object):
         zoom_lvl_index = self.get_default_view_zoom_level(self.default_view)
         return ChangeFolderColorBase.ZOOM_LEVEL_ICON_SIZES[self.default_view][zoom_lvl_index]
 
-    def get_folder_icon_name(self, directory):
-        logger.debug("get_folder_icon_name: %s", directory)
+    @staticmethod
+    def get_folder_icon_name(directory):
         return ChangeFolderColorBase.KNOWN_DIRECTORIES.get(directory, 'folder')
 
     def get_desired_icon_size(self):
