@@ -349,10 +349,6 @@ class ChangeFolderColor(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
         super().__init__()
 
         logger.info("Initializing folder-color-switcher extension...")
-        locale.setlocale(locale.LC_ALL, '')
-        gettext.bindtextdomain('folder-color-switcher')
-        gettext.textdomain('folder-color-switcher')
-
         logger.debug("Known themes are: %s", ', '.join(list(ColoredIconThemeSet.KNOWN_THEMES.keys())))
 
     def menu_activate_cb(self, menu, color, folders):
@@ -397,6 +393,9 @@ class ChangeFolderColor(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
         supported_colors = self.themeset.get_available_colors()
 
         if supported_colors:
+            locale.setlocale(locale.LC_ALL, '')
+            gettext.bindtextdomain('folder-color-switcher')
+            gettext.textdomain('folder-color-switcher')
             logger.debug("At least one color supported: creating menu entry")
             item = Nemo.MenuItem(name='ChangeFolderColorMenu::Top')
             item.set_widget_a(self.generate_widget(supported_colors, directories_selected))
