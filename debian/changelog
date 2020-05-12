@@ -1,3 +1,22 @@
+folder-color-switcher (1.4.1) ulyana; urgency=medium
+
+  [ okaestne ]
+  * Skip files in selection instead of stopping
+  * Partially revert "Skip files in selection instead of stopping"
+
+  [ NikoKrause ]
+  * use new color palette
+
+  [ okaestne ]
+  * Major rewrite: Use Gtk.IconTheme to find icons (fixes #22) (#26)
+
+  [ Clement Lefebvre ]
+  * Add missing POT and makepot
+  * l10n: Update translations
+  * Nemo: Fix i18n..
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 12 May 2020 13:12:01 +0100
+
 folder-color-switcher (1.4.0) ulyana; urgency=medium
 
   [ okaestne ]
