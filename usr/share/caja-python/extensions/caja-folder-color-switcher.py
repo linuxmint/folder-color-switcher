@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # Folder Color 0.0.11
 # Copyright (C) 2012-2014 Marcos Alvarez Costales https://launchpad.net/~costales
@@ -16,10 +17,18 @@
 # along with Folder Color; if not, see http://www.gnu.org/licenses
 # for more information.
 
-import os, urllib, gettext, locale, collections
-import subprocess
-from gi.repository import Caja, GObject, Gio, GLib
+import os, gettext, locale, collections, re, gi
+
+gi.require_version('Gtk', '3.0')
+gi.require_version('Caja', '2.0')
+
+from gi.repository import Caja, GObject, Gio, GLib, Gtk
 _ = gettext.gettext
+P_ = gettext.ngettext
+
+import signal
+signal.signal(signal.SIGINT, signal.SIG_DFL)
+
 
 # LOGGING setup:
 # By default, we are only logging messages of level WARNING or higher.
@@ -60,11 +69,13 @@ COLORS = collections.OrderedDict ([
             ('Black', _('Black'))
            ])
 
-class Theme(object):
-    KNOWN_THEMES = {
-        'Mint-X': 'Green',
-        'Mint-Y': 'Green',
+class ColoredIconThemeSet:
+    # ordered because matched using "startsWith"
+    KNOWN_THEMES = collections.OrderedDict({
         'Mint-X-Dark': 'Green',
+        'Mint-X': 'Green',
+        'Mint-Y-Dark': 'Green', # falls back to Mint-Y itself, but has color variants
+        'Mint-Y': 'Green',
         'Rave-X-CX': 'Beige',
         'Faience': 'Beige',
         'gnome': 'Beige',
@@ -72,248 +83,238 @@ class Theme(object):
         'menta': 'Green',
         'mate': 'Beige',
         'oxygen': 'Blue'
-    }
-    logger.debug("Known themes are: %s" % KNOWN_THEMES)
+    })
 
-    def __init__(self, base_name, color_variant):
-        self.base_name = base_name
-        self.color_variant = color_variant
+    def __init__(self):
+        self.availableColoredIconThemes = {}
 
-        self.base_path = str("/usr/share/icons/%s/" % self)
+        self.it_settings = Gio.Settings.new("org.mate.interface") # path: /org/mate/desktop/interface
+        self._on_icon_theme_changed(None)
+        self.currentIconTheme.connect('changed', self._on_icon_theme_changed)
 
-        self.variants = {}
-        self.default_folder_file = None
-        self.inherited_themes_cache = None
-        self.supported_theme_colors = None
+    def _on_icon_theme_changed(self, theme):
+        # get current icon theme, might be a variant, e.g. "Mint-Y-Aqua"
+        self.currentIconTheme = Gtk.IconTheme.get_default()
 
-        self.KNOWN_DIRECTORIES = {
-            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP): 'user-desktop',
-            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS): 'folder-documents',
-            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD): 'folder-download',
-            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_MUSIC): 'folder-music',
-            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES): 'folder-pictures',
-            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PUBLIC_SHARE): 'folder-publicshare',
-            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_TEMPLATES): 'folder-templates',
-            GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS): 'folder-videos',
-            GLib.get_home_dir(): 'folder-home',
-        }
+        # get its name
+        self.currentIconThemeName = self.it_settings.get_string("icon-theme")
+        logger.debug("IconTheme changed to: %s", self.currentIconThemeName)
 
-        self.discover_image_support()
+        self._determine_base_icon_theme()
+        self._load_available_colors()
 
-    def __str__(self):
-        if self.color_variant:
-            return "%s-%s" % (self.base_name, self.color_variant)
-        else:
-            return "%s" % self.base_name
+    def _determine_base_icon_theme(self):
+        # the determined base icon theme, e.g. "Mint-Y"
+        self.currentBaseIconThemeName = None
 
-    @staticmethod
-    def parse(theme_str):
-        base_name = theme_str
-        color_variant = None
-        for color in COLORS:
-            if theme_str.endswith("-%s" % color):
-                base_name = theme_str[:-len("-%s" % color)]
-                color_variant = color
-        return base_name, color_variant
+        # exact match (== no color variant in use)
+        if self.currentIconThemeName in self.KNOWN_THEMES:
+            self.currentBaseIconThemeName = self.currentIconThemeName
+            return
 
-    @staticmethod
-    def from_theme_name(theme_str):
-        base_name, color_variant = Theme.parse(theme_str)
-        return Theme(base_name, color_variant)
-
-    def get_variant(self, base_name, color):
-        if color is not None:
-            key = "%s-%s" % (base_name, color)
-        else:
-            key = "%s" % base_name
-
-        if key in self.variants.keys():
-            return self.variants[key]
-        else:
-            variant = Theme(base_name, color)
-            self.variants[key] = variant
-            return variant
-
-    def discover_image_support(self):
-        logger.debug("Discovering image support for theme %s" % self)
-
-        for key in self.KNOWN_DIRECTORIES.keys():
-            found = False
-
-            for ext in (".png", ".svg"):
-                path = os.path.join(self.base_path, "places", "48", self.KNOWN_DIRECTORIES[key] + ext)
-
-                if os.path.isfile(path):
-                    logger.debug("Found icon for '%s' at '%s'" % (key, path))
-                    self.KNOWN_DIRECTORIES[key] = path
-                    found = True
-                    break
-
-            if not found:
-                self.KNOWN_DIRECTORIES[key] = None
-
-        for ext in (".png", ".svg"):
-            path = os.path.join(self.base_path, "places", "48", "folder" + ext)
-
-            if os.path.isfile(path):
-                logger.debug("Found generic folder icon at '%s'" % (path,))
-
-                self.default_folder_file = path
+        # naive via name
+        for theme in self.KNOWN_THEMES:
+            if self.currentIconThemeName.startswith(theme):
+                self.currentBaseIconThemeName = theme
                 break
 
-    def get_folder_icon_path(self, directory=None):
-        return self.KNOWN_DIRECTORIES.get(directory, self.default_folder_file)
+    def _load_available_colors(self):
+        if self.currentBaseIconThemeName is None:
+            # non-supported icon theme
+            self.availableColoredIconThemes = {}
+            return
 
-    def get_index_theme_path(self):
-        return os.path.join(self.base_path, "index.theme")
+        # add base theme color, when using a variant
+        if self.currentBaseIconThemeName != self.currentIconThemeName:
+            it = Gtk.IconTheme.new()
+            it.set_custom_theme(self.currentBaseIconThemeName)
+            base_color = self.KNOWN_THEMES[self.currentBaseIconThemeName]
+            self.availableColoredIconThemes[base_color] = it
 
-    def has_icon_for_folder(self, directory=None):
-        return self.get_folder_icon_path(directory) is not None
+        for color in COLORS:
+            it = Gtk.IconTheme.new()
+            it.set_custom_theme('%s-%s' % (self.currentBaseIconThemeName, color))
 
-    def inherited_themes(self):
-        if self.inherited_themes_cache == None:
-            result = []
+            # check if the default 'folder' icon is available for the given color (size: 32).
+            # HACK: to ignore fallback icons, check that the base theme name is included in the icon path
+            icon_info = it.choose_icon(['folder', None], 32, 0)
 
-            logger.debug('Importing config parser...')
-            import ConfigParser
-            parser = ConfigParser.RawConfigParser()
-            index_theme_path = self.get_index_theme_path()
-            try:
-                logger.debug('Trying to read index.theme at %s' % index_theme_path)
-                parser.read(index_theme_path)
-                inherits_str = parser.get('Icon Theme', 'Inherits')
-                logger.debug('Theme %s inherits %s' % (self, inherits_str))
-
-                for parent in inherits_str.split(","):
-                    result.append(Theme.from_theme_name(parent))
-            except:
-                logger.info('Could not read index.theme for theme %s' % self)
-                result = []
-
-            self.inherited_themes_cache = result
-        return self.inherited_themes_cache
-
-    def get_ancestor_defining_folder_svg(self, directory=None):
-        if self.has_icon_for_folder(directory):
-            return self
-        for theme in self.inherited_themes():
-            ancestor = theme.get_ancestor_defining_folder_svg(directory)
-            if ancestor:
-                return ancestor
-        return None
-
-    def sibling(self, color):
-        if color == self.color:
-            # This theme implements the desired color
-            return self
-        elif color == Theme.KNOWN_THEMES.get(self.base_name):
-            # The base version of this theme implements the desired color
-            return self.get_variant(self.base_name, None)
-        else:
-            # The color belongs to a color variant
-            return self.get_variant(self.base_name, color)
-
-    def find_folder_icon(self, color, directory=None):
-        logger.debug("Trying to find icon for directory %s in %s for theme %s" % (directory, color, self))
-        relevant_ancestor = self.get_ancestor_defining_folder_svg(directory)
-        if not relevant_ancestor:
-            logger.debug("Could not find ancestor defining SVG")
-            return None
-
-        logger.debug("Ancestor defining SVG is %s" % relevant_ancestor)
-        colored_theme = relevant_ancestor.sibling(color)
-
-        return colored_theme.get_folder_icon_path(directory)
-
-    def get_supported_colors(self, paths):
-        if self.supported_theme_colors == None:
-            supported_colors = []
-
-            for color in COLORS:
-                color_supported = True
-                for directory in paths:
-                    icon_path = self.find_folder_icon(color, directory)
-                    if not icon_path:
-                        color_supported = False
-                        break
-                if color_supported:
-                    supported_colors.append(color)
-
-            self.supported_theme_colors = supported_colors
-
-        return self.supported_theme_colors
-
-    @property
-    def color(self):
-        if self.color_variant:
-            return self.color_variant
-        else:
-            return Theme.KNOWN_THEMES.get(self.base_name)
-
-
-class ChangeFolderColorBase(object):
-    def update_theme(self, theme_str):
-        logger.info("Current icon theme: %s", theme_str)
-        self.theme = Theme.from_theme_name(theme_str)
-        logger.info("Its color is %s", self.theme.color)
-
-    def set_folder_icons(self, color, items):
-        for item in items:
-
-            if item.is_gone():
+            if not icon_info or self.currentBaseIconThemeName not in icon_info.get_filename():
                 continue
 
-            # Get object
-            path = urllib.unquote(item.get_uri()[7:])
-            directory = item.get_location()
-            info = directory.query_info('metadata::custom-icon', 0, None)
+            self.availableColoredIconThemes[color] = it
 
-            # Set color
+    def get_available_colors(self):
+        return self.availableColoredIconThemes.keys()
+
+    def get_icon_uri_for_color_size_and_scale(self, icon_name: str, color: str, size: int, scale: int) -> str:
+        logger.debug('Searching: icon "%s" for color "%s", size %i and scale %i', icon_name, color, size, scale)
+        icon_theme = self.availableColoredIconThemes.get(color, None)
+
+        if icon_theme:
+            icon_info = icon_theme.choose_icon_for_scale([icon_name, None], size, scale, 0)
+            if icon_info:
+                uri = GLib.filename_to_uri(icon_info.get_filename(), None)
+                logger.debug("Found icon at URI: %s", uri)
+                return uri
+
+        logger.debug('No icon "%s" found for color "%s", size %i and scale %i', icon_name, color, size, scale)
+        return None
+
+class ChangeFolderColorBase(object):
+    # view[zoom-level] -> icon size
+    # Notes:
+    # - icon size:    values from nemo/libnemo-private/nemo-icon-info.h (checked)
+    # - list view:    icon sizes don't match the defined sizes in nemo-icon-info.h (yet)
+    # - compact view: hasn't defined sizes defined in nemo-icon-info.h
+    ZOOM_LEVEL_ICON_SIZES = {
+        'icon-view'    : [16, 24, 32, 48, 72, 96,  192],
+        'list-view'    : [16, 24, 32, 48, 72, 96,  192],
+        'compact-view' : [16, 16, 18, 24, 36, 48,  96 ]
+    }
+
+    ZOOM_LEVELS = {
+        'smallest' : 0,
+        'smaller'  : 1,
+        'small'    : 2,
+        'standard' : 3,
+        'large'    : 4,
+        'larger'   : 5,
+        'largest'  : 6
+    }
+
+    # https://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html
+    KNOWN_DIRECTORIES = {
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP): 'user-desktop',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS): 'folder-documents',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD): 'folder-download',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_MUSIC): 'folder-music',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES): 'folder-pictures',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PUBLIC_SHARE): 'folder-publicshare',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_TEMPLATES): 'folder-templates',
+        GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS): 'folder-videos',
+        GLib.get_home_dir(): 'user-home'
+    }
+
+    def __init__(self):
+        self.parent_directory = None
+
+        # view preferences
+        self.default_view = None
+
+        self.themeset = ColoredIconThemeSet()
+
+        self.caja_settings = Gio.Settings.new("org.mate.caja.preferences")
+        self.caja_settings.connect("changed::default-folder-viewer", self.on_default_view_changed)
+        self.on_default_view_changed(None)
+
+    def on_default_view_changed(self, settings, key="default-folder-viewer"):
+        self.default_view = self.caja_settings.get_string(key)
+
+    @staticmethod
+    def get_default_view_zoom_level(view="icon-view"):
+        zoom_lvl_string = Gio.Settings.new("org.mate.caja.%s" % view).get_string("default-zoom-level")
+        return ChangeFolderColorBase.ZOOM_LEVELS[zoom_lvl_string]
+
+    def get_default_view_icon_size(self):
+        zoom_lvl_index = self.get_default_view_zoom_level(self.default_view)
+        return ChangeFolderColorBase.ZOOM_LEVEL_ICON_SIZES[self.default_view][zoom_lvl_index]
+
+    @staticmethod
+    def get_folder_icon_name(directory):
+        return ChangeFolderColorBase.KNOWN_DIRECTORIES.get(directory, 'folder')
+
+    def get_desired_icon_size(self):
+        return self.get_current_view_icon_size()
+
+    def get_current_view_icon_size(self):
+        # get the folder where we are currently in
+        if not self.parent_directory:
+            return 64
+
+        info = self.parent_directory.get_location().query_info('metadata::*', 0, None)
+        meta_view = info.get_attribute_string('metadata::caja-default-view')
+
+        if meta_view:
+            match = re.search("OAFIID:Caja_File_Manager_(\\w+)_View", meta_view)
+            view = match.group(1).lower() + "-view"
+        else:
+            view = self.default_view
+
+        if view in self.ZOOM_LEVEL_ICON_SIZES.keys():
+            # the zoom level is store as string ('0', ... , '6')
+            meta_zoom_lvl = info.get_attribute_string("metadata::caja-%s-zoom-level" % view)
+
+            if not meta_zoom_lvl:
+                # if view is set while the conresponding zoom level is not
+                # (e.g. user switched views in this folder but never used zoom)
+                zoom_level = self.get_default_view_zoom_level(view)
+            else:
+                zoom_level = int(meta_zoom_lvl)
+
+            icon_size = self.ZOOM_LEVEL_ICON_SIZES[view][zoom_level]
+            logger.debug("Icon size for the current view is: %i", icon_size)
+            return icon_size
+
+        logger.debug("falling back to defaults")
+        return self.get_default_view_icon_size()
+
+
+    def set_folder_colors(self, folders, color):
+        self.parent_directory = folders[0].get_parent_info()
+        logger.debug("Parent folder is: %s", self.parent_directory.get_uri())
+
+        if color:
+            icon_size = self.get_desired_icon_size()
+            default_folder_icon_uri = self.themeset.get_icon_uri_for_color_size_and_scale('folder', color, icon_size, self.scale_factor)
+
+            if not default_folder_icon_uri:
+                return
+
+        for folder in folders:
+            if folder.is_gone():
+                continue
+
+            # get Gio.File object
+            directory = folder.get_location()
+            path = directory.get_path()
+
             if color:
-                icon_path = self.theme.find_folder_icon(color, path)
-                if icon_path:
-                    icon_file = Gio.File.new_for_path(icon_path)
-                    icon_uri = icon_file.get_uri()
-                    info.set_attribute_string('metadata::custom-icon', icon_uri)
-                    logger.info('Set custom-icon of %s to %s' % (path, icon_path))
-                else:
-                    logger.error('Could not find %s colored icon' % color)
+                icon_uri = default_folder_icon_uri
+                icon_name = self.get_folder_icon_name(path)
+
+                if icon_name != 'folder':
+                    icon_uri = self.themeset.get_icon_uri_for_color_size_and_scale(icon_name, color, icon_size, self.scale_factor)
+
+                if icon_uri:
+                    directory.set_attribute_string('metadata::custom-icon', icon_uri, 0, None)
             else:
                 # A color of None unsets the custom-icon
-                info.set_attribute('metadata::custom-icon', Gio.FileAttributeType.INVALID, 0)
+                directory.set_attribute('metadata::custom-icon', Gio.FileAttributeType.INVALID, 0, 0, None)
 
-            # Write changes
-            directory.set_attributes_from_info(info, 0, None)
-
-            # Touch the directory to make Nemo/Caja re-render its icons
-            subprocess.call(["touch", path])
+            # update the directory's modified date to make Nemo/Caja re-render its icon
+            os.utime(path, None)
 
 class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvider):
     def __init__(self):
-        logger.info("Initializing folder-color-switcher extension...")
+        super().__init__()
+        self.scale_factor = 1
         self.SEPARATOR = u'\u2015' * 4
-        self.settings = Gio.Settings.new("org.mate.interface")
-        self.settings.connect("changed::icon-theme", self.on_theme_changed)
-        self.on_theme_changed(None, None)
 
-    def on_theme_changed(self, settings, key):
-        self.update_theme(self.settings.get_string("icon-theme"))
+        logger.info("Initializing folder-color-switcher extension...")
+        logger.debug("Known themes are: %s", ', '.join(list(ColoredIconThemeSet.KNOWN_THEMES.keys())))
 
     def menu_activate_cb(self, menu, color, folders):
-        self.set_folder_icons(color, folders)
+        self.set_folder_colors(folders, color)
 
     def get_background_items(self, window, current_folder):
-        return []
+        return None
 
     # Caja invoke this function in its startup > Then, create menu entry
     def get_file_items(self, window, items_selected):
         if not items_selected:
             # No items selected
             return
-
-        locale.setlocale(locale.LC_ALL, '')
-        gettext.bindtextdomain('folder-color-switcher')
-        gettext.textdomain('folder-color-switcher')
 
         directories = []
         directories_selected = []
@@ -337,9 +338,12 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvide
         if not directories_selected:
             return
 
-        supported_colors = self.theme.get_supported_colors(directories)
+        supported_colors = self.themeset.get_available_colors()
 
         if supported_colors:
+            locale.setlocale(locale.LC_ALL, '')
+            gettext.bindtextdomain('folder-color-switcher')
+            gettext.textdomain('folder-color-switcher')
             logger.debug("At least one color supported: creating menu entry")
             top_menuitem = Caja.MenuItem(name='ChangeFolderColorMenu::Top', label=_("Change color"))
             submenu = Caja.Menu()
