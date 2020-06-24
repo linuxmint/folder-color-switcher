@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-15 21:45+0200\n"
-"PO-Revision-Date: 2014-09-17 14:10+0000\n"
-"Last-Translator: Tobias Bannert <tobannert@gmail.com>\n"
+"PO-Revision-Date: 2020-05-17 18:34+0000\n"
+"Last-Translator: Oliver Kästner <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-05-11 10:59+0000\n"
-"X-Generator: Launchpad (build fbdff7602bd10fb883bf7e2ddcc7fd5a16f60398)\n"
+"X-Launchpad-Export-Date: 2020-06-24 10:08+0000\n"
+"X-Generator: Launchpad (build 1cbd0aa39df153c901321817f9b57cf3f232b507)\n"
 
 #: ../nemo-extensions/nemo-folder-color.py:172
 #: ../caja-extensions/caja-folder-color.py:136
@@ -100,11 +100,11 @@ msgstr "Schwarz"
 
 #: ../nemo-extensions/nemo-folder-color.py:230
 msgid "Restores the color of the selected folders"
-msgstr "Stellt die Farbe der ausgewählten Ordner wieder hier"
+msgstr "Stellt die Farbe der ausgewählten Ordner wieder her"
 
 #: ../nemo-extensions/nemo-folder-color.py:232
 msgid "Restores the color of the selected folder"
-msgstr "Stellt die Farbe des ausgewählten Ordners wieder hier"
+msgstr "Stellt die Farbe des ausgewählten Ordners wieder her"
 
 #: ../nemo-extensions/nemo-folder-color.py:241
 #, python-format
