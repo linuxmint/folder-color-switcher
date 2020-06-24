@@ -1,3 +1,9 @@
+folder-color-switcher (1.4.4) ulyana; urgency=medium
+
+  * l10n: Update translations
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 24 Jun 2020 11:44:16 +0100
+
 folder-color-switcher (1.4.3) ulyana; urgency=medium
 
   * Go back to original colors
