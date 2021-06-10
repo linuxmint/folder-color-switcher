@@ -1,3 +1,9 @@
+folder-color-switcher (1.4.7) uma; urgency=medium
+
+  * l10n: Update translations
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 10 Jun 2021 11:43:01 +0100
+
 folder-color-switcher (1.4.6) ulyssa; urgency=medium
 
   * l10n: Update translations
