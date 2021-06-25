@@ -1,16 +1,16 @@
-# Lithuanian translation for linuxmint
-# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# Serbian Ijekavian translation for linuxmint
+# Copyright (c) 2021 Rosetta Contributors and Canonical Ltd 2021
 # This file is distributed under the same license as the linuxmint package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-15 21:45+0200\n"
-"PO-Revision-Date: 2017-11-16 18:46+0000\n"
-"Last-Translator: Moo <hazap@hotmail.com>\n"
-"Language-Team: Lithuanian <lt@li.org>\n"
+"PO-Revision-Date: 2021-06-16 12:47+0000\n"
+"Last-Translator: Dušan Jović <Unknown>\n"
+"Language-Team: Serbian Ijekavian <sr@ijekavian@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,108 +20,108 @@ msgstr ""
 #: ../nemo-extensions/nemo-folder-color.py:172
 #: ../caja-extensions/caja-folder-color.py:136
 msgid "Sand"
-msgstr "Smėlis"
+msgstr "Пијесак"
 
 #: ../nemo-extensions/nemo-folder-color.py:173
 #: ../caja-extensions/caja-folder-color.py:135
 msgid "Beige"
-msgstr "Rusvai gelsva"
+msgstr "Беж"
 
 #: ../nemo-extensions/nemo-folder-color.py:174
 #: ../caja-extensions/caja-folder-color.py:149
 msgid "Yellow"
-msgstr "Geltona"
+msgstr "Жута"
 
 #: ../nemo-extensions/nemo-folder-color.py:175
 #: ../caja-extensions/caja-folder-color.py:143
 msgid "Orange"
-msgstr "Oranžinė"
+msgstr "Наранџаста"
 
 #: ../nemo-extensions/nemo-folder-color.py:176
 #: ../caja-extensions/caja-folder-color.py:139
 msgid "Brown"
-msgstr "Ruda"
+msgstr "Браон"
 
 #: ../nemo-extensions/nemo-folder-color.py:177
 #: ../caja-extensions/caja-folder-color.py:146
 msgid "Red"
-msgstr "Raudona"
+msgstr "Црвенa"
 
 #: ../nemo-extensions/nemo-folder-color.py:178
 #: ../caja-extensions/caja-folder-color.py:145
 msgid "Purple"
-msgstr "Purpurinė"
+msgstr "Љубичаста"
 
 #: ../nemo-extensions/nemo-folder-color.py:179
 #: ../caja-extensions/caja-folder-color.py:144
 msgid "Pink"
-msgstr "Rožinė"
+msgstr "Розе"
 
 #: ../nemo-extensions/nemo-folder-color.py:180
 #: ../caja-extensions/caja-folder-color.py:138
 msgid "Blue"
-msgstr "Mėlyna"
+msgstr "Плава"
 
 #: ../nemo-extensions/nemo-folder-color.py:181
 #: ../caja-extensions/caja-folder-color.py:140
 msgid "Cyan"
-msgstr "Žydra"
+msgstr "Цијан"
 
 #. Colors submenu
 #: ../nemo-extensions/nemo-folder-color.py:182
 #: ../caja-extensions/caja-folder-color.py:134
 msgid "Aqua"
-msgstr "Vandens"
+msgstr "Водена"
 
 #: ../nemo-extensions/nemo-folder-color.py:183
 #: ../caja-extensions/caja-folder-color.py:147
 msgid "Teal"
-msgstr "Tamsiai žydra"
+msgstr "Зеленкаста"
 
 #: ../nemo-extensions/nemo-folder-color.py:184
 #: ../caja-extensions/caja-folder-color.py:141
 msgid "Green"
-msgstr "Žalia"
+msgstr "Зелена"
 
 #: ../nemo-extensions/nemo-folder-color.py:185
 #: ../caja-extensions/caja-folder-color.py:148
 msgid "White"
-msgstr "Balta"
+msgstr "Бијела"
 
 #: ../nemo-extensions/nemo-folder-color.py:186
 #: ../caja-extensions/caja-folder-color.py:142
 msgid "Grey"
-msgstr "Pilka"
+msgstr "Сива"
 
 #: ../nemo-extensions/nemo-folder-color.py:187
 #: ../caja-extensions/caja-folder-color.py:137
 msgid "Black"
-msgstr "Juoda"
+msgstr "Црна"
 
 #: ../nemo-extensions/nemo-folder-color.py:230
 msgid "Restores the color of the selected folders"
-msgstr "Atstato pasirinktų aplankų spalvą"
+msgstr "Враћа подразумевану боју изабраним фасциклама"
 
 #: ../nemo-extensions/nemo-folder-color.py:232
 msgid "Restores the color of the selected folder"
-msgstr "Atstato pasirinkto aplanko spalvą"
+msgstr "Враћа подразумевану боју изабраној фасцикли"
 
 #: ../nemo-extensions/nemo-folder-color.py:241
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr "Pakeičia nurodytų aplankų spalvą į %s"
+msgstr "Мења боју изабраним фасциклама у %s"
 
 #: ../nemo-extensions/nemo-folder-color.py:243
 #, python-format
 msgid "Changes the color of the selected folder to %s"
-msgstr "Pakeičia nurodyto aplanko spalvą į %s"
+msgstr "Мења боју изабраној фасцикли у %s"
 
 #. Main menu [1 or +1 folder(s)]
 #: ../caja-extensions/caja-folder-color.py:129
 msgid "Change color"
-msgstr "Keisti spalvą"
+msgstr "Измјени боју"
 
 #. Restore
 #: ../caja-extensions/caja-folder-color.py:173
 msgid "Default"
-msgstr "Numatytoji"
+msgstr "Подразумјевано"
