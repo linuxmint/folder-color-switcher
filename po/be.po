@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-15 21:45+0200\n"
-"PO-Revision-Date: 2015-12-25 16:04+0000\n"
-"Last-Translator: meequz <meequz@gmail.com>\n"
+"PO-Revision-Date: 2021-09-04 15:28+0000\n"
+"Last-Translator: Anton Hryb <Unknown>\n"
 "Language-Team: Belarusian <be@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-06-25 10:38+0000\n"
-"X-Generator: Launchpad (build 40cc6dba4163ba9ca785b26ad91f43c87d70ba4d)\n"
+"X-Launchpad-Export-Date: 2021-12-06 15:02+0000\n"
+"X-Generator: Launchpad (build f92b6e0bb2624f8a9125e3f45b7621c6e230c5ff)\n"
 
 #: ../nemo-extensions/nemo-folder-color.py:172
 #: ../caja-extensions/caja-folder-color.py:136
@@ -50,7 +50,7 @@ msgstr "Чырвоны"
 #: ../nemo-extensions/nemo-folder-color.py:178
 #: ../caja-extensions/caja-folder-color.py:145
 msgid "Purple"
-msgstr "Пурпурны"
+msgstr "Фіялетавы"
 
 #: ../nemo-extensions/nemo-folder-color.py:179
 #: ../caja-extensions/caja-folder-color.py:144
@@ -100,21 +100,21 @@ msgstr "Чорны"
 
 #: ../nemo-extensions/nemo-folder-color.py:230
 msgid "Restores the color of the selected folders"
-msgstr "Аднавіць колер вылучаных каталогаў"
+msgstr "Аднавіць зыходны колер вылучаных папак"
 
 #: ../nemo-extensions/nemo-folder-color.py:232
 msgid "Restores the color of the selected folder"
-msgstr "Аднавіць колер вылучанага каталога"
+msgstr "Аднавіць зыходны колер вылучанай папкі"
 
 #: ../nemo-extensions/nemo-folder-color.py:241
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr "Змяніць колер вылучаных каталогаў на %s"
+msgstr "Змяніць колер вылучаных папак на %s"
 
 #: ../nemo-extensions/nemo-folder-color.py:243
 #, python-format
 msgid "Changes the color of the selected folder to %s"
-msgstr "Змяніць колер вылучанага каталога на %s"
+msgstr "Змяніць колер вылучанай папкі на %s"
 
 #. Main menu [1 or +1 folder(s)]
 #: ../caja-extensions/caja-folder-color.py:129
@@ -124,4 +124,4 @@ msgstr "Змяніць колер"
 #. Restore
 #: ../caja-extensions/caja-folder-color.py:173
 msgid "Default"
-msgstr "Стандартна"
+msgstr "Зыходны"

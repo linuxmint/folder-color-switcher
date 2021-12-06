@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-15 21:45+0200\n"
-"PO-Revision-Date: 2020-11-28 22:15+0000\n"
-"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
+"PO-Revision-Date: 2021-10-03 16:43+0000\n"
+"Last-Translator: Саша Петровић <salepetronije@gmail.com>\n"
 "Language-Team: Serbian <(nothing)>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-06-25 10:38+0000\n"
-"X-Generator: Launchpad (build 40cc6dba4163ba9ca785b26ad91f43c87d70ba4d)\n"
+"X-Launchpad-Export-Date: 2021-12-06 15:02+0000\n"
+"X-Generator: Launchpad (build f92b6e0bb2624f8a9125e3f45b7621c6e230c5ff)\n"
 "Language: sr\n"
 
 #: ../nemo-extensions/nemo-folder-color.py:172
@@ -57,7 +57,7 @@ msgstr "Љубичаста"
 #: ../nemo-extensions/nemo-folder-color.py:179
 #: ../caja-extensions/caja-folder-color.py:144
 msgid "Pink"
-msgstr "Розе"
+msgstr "Ружичаста"
 
 #: ../nemo-extensions/nemo-folder-color.py:180
 #: ../caja-extensions/caja-folder-color.py:138
