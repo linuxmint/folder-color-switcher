@@ -1,3 +1,9 @@
+folder-color-switcher (1.5.3) vera; urgency=medium
+
+  * Update colors
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 22 Nov 2022 15:10:06 +0000
+
 folder-color-switcher (1.5.2) vanessa; urgency=medium
 
   * l10n: Update translations
