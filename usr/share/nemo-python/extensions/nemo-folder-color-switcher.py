@@ -75,6 +75,8 @@ class ColoredIconThemeSet:
     KNOWN_THEMES = collections.OrderedDict({
         'Mint-X-Dark': 'Green',
         'Mint-X': 'Green',
+        'Mint-Y-Legacy-Dark': 'Green', # falls back to Mint-Y-Legacy first, as our matcher looks for a common prefix.
+        'Mint-Y-Legacy': 'Green',
         'Mint-Y-Dark': 'Green', # falls back to Mint-Y itself, but has color variants
         'Mint-Y': 'Green',
         'Rave-X-CX': 'Beige',
@@ -115,8 +117,10 @@ class ColoredIconThemeSet:
 
         # naive via name
         for theme in self.KNOWN_THEMES:
+            logger.debug("Comparing known base theme '%s' with current theme '%s'" % (theme, self.currentIconThemeName))
             if self.currentIconThemeName.startswith(theme):
                 self.currentBaseIconThemeName = theme
+                logger.debug("Matched (%s)" % self.currentBaseIconThemeName)
                 break
 
     def _load_available_colors(self):
