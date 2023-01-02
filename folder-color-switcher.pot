@@ -97,6 +97,10 @@ msgstr ""
 msgid "Black"
 msgstr ""
 
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:367
+msgid "Folder Color Switcher:::Allows you to change folder colors from the context menu under supported icon themes"
+msgstr ""
+
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:418
 msgid "Restores the color of the selected folders"
 msgstr ""
