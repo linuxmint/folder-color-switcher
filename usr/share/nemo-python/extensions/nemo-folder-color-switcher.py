@@ -23,8 +23,16 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('Nemo', '3.0')
 
 from gi.repository import Nemo, GObject, Gio, GLib, Gtk, Gdk
+
+# i18n
+APP = 'folder-color-switcher'
+LOCALE_DIR = "/usr/share/locale"
+locale.bindtextdomain(APP, LOCALE_DIR)
+gettext.bindtextdomain(APP, LOCALE_DIR)
+gettext.textdomain(APP)
 _ = gettext.gettext
-P_ = gettext.ngettext
+
+PLUGIN_DESCRIPTION = _('Allows you to change folder colors from the context menu under supported icon themes')
 
 import signal
 signal.signal(signal.SIGINT, signal.SIG_DFL)
@@ -364,7 +372,7 @@ class ChangeFolderColor(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
         return
 
     def get_name_and_desc(self):
-        return [("Folder Color Switcher:::Allows you to change folder colors from the context menu under supported icon themes")]
+        return [("Folder Color Switcher:::%s" % PLUGIN_DESCRIPTION)]
 
     # Nemo invoke this function in its startup > Then, create menu entry
     def get_file_items(self, window, items_selected):
