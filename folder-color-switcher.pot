@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-12 12:30+0100\n"
+"POT-Creation-Date: 2023-01-18 13:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,108 +17,114 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:54
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:45
-msgid "Sand"
-msgstr ""
-
-#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:55
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:46
-msgid "Beige"
-msgstr ""
-
-#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:56
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:47
-msgid "Yellow"
-msgstr ""
-
-#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:57
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:48
-msgid "Orange"
-msgstr ""
-
-#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:58
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:49
-msgid "Brown"
-msgstr ""
-
-#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:59
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:50
-msgid "Red"
-msgstr ""
-
-#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:60
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:51
-msgid "Purple"
-msgstr ""
-
-#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:61
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:52
-msgid "Pink"
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:35
+msgid ""
+"Allows you to change folder colors from the context menu under supported "
+"icon themes"
 msgstr ""
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:62
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:53
-msgid "Blue"
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:54
+msgid "Sand"
 msgstr ""
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:63
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:54
-msgid "Cyan"
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:55
+msgid "Beige"
 msgstr ""
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:64
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:55
-msgid "Aqua"
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:56
+msgid "Yellow"
 msgstr ""
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:65
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:56
-msgid "Teal"
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:57
+msgid "Orange"
 msgstr ""
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:66
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:57
-msgid "Green"
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:58
+msgid "Brown"
 msgstr ""
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:67
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:58
-msgid "White"
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:59
+msgid "Red"
 msgstr ""
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:68
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:59
-msgid "Grey"
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:60
+msgid "Purple"
 msgstr ""
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:69
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:60
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:61
+msgid "Pink"
+msgstr ""
+
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:70
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:62
+msgid "Blue"
+msgstr ""
+
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:71
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:63
+msgid "Cyan"
+msgstr ""
+
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:72
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:64
+msgid "Aqua"
+msgstr ""
+
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:73
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:65
+msgid "Teal"
+msgstr ""
+
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:74
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:66
+msgid "Green"
+msgstr ""
+
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:75
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:67
+msgid "White"
+msgstr ""
+
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:76
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:68
+msgid "Grey"
+msgstr ""
+
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:77
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:69
 msgid "Black"
 msgstr ""
 
-#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:418
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:429
 msgid "Restores the color of the selected folders"
 msgstr ""
 
-#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:420
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:431
 msgid "Restores the color of the selected folder"
 msgstr ""
 
-#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:430
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:441
 #, python-format
 msgid "Changes the color of the selected folders to %s"
 msgstr ""
 
-#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:432
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:443
 #, python-format
 msgid "Changes the color of the selected folder to %s"
 msgstr ""
 
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:344
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:352
 msgid "Change color"
 msgstr ""
 
-#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:360
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:368
 msgid "Default"
 msgstr ""
