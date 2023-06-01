@@ -1,3 +1,12 @@
+folder-color-switcher (1.5.6) victoria; urgency=medium
+
+  * nemo: Localize the plugin description
+  * l10n: Update POT
+  * Read colors dynamically
+  * Remove obsolete icons
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 01 Jun 2023 11:28:18 +0100
+
 folder-color-switcher (1.5.5) vera; urgency=medium
 
   * l10n: Update translations
