@@ -7,121 +7,126 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-15 21:45+0200\n"
-"PO-Revision-Date: 2021-09-04 15:28+0000\n"
+"POT-Creation-Date: 2023-01-18 13:24+0000\n"
+"PO-Revision-Date: 2023-02-19 18:35+0000\n"
 "Last-Translator: Anton Hryb <Unknown>\n"
 "Language-Team: Belarusian <be@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2022-12-16 11:47+0000\n"
-"X-Generator: Launchpad (build 31c78762a8046acf7ab47372e5d588ebb3759d2e)\n"
+"X-Launchpad-Export-Date: 2023-06-08 10:20+0000\n"
+"X-Generator: Launchpad (build 620cd5280e3a973662e263ebf9346837ed657a46)\n"
 
-#: ../nemo-extensions/nemo-folder-color.py:172
-#: ../caja-extensions/caja-folder-color.py:136
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:35
+msgid ""
+"Allows you to change folder colors from the context menu under supported "
+"icon themes"
+msgstr ""
+"Дазваляе змяніць колеры папкі праз кантэкстнае меню падтрымліваемых тэм "
+"значкоў"
+
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:62
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:54
 msgid "Sand"
 msgstr "Пясочны"
 
-#: ../nemo-extensions/nemo-folder-color.py:173
-#: ../caja-extensions/caja-folder-color.py:135
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:63
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:55
 msgid "Beige"
 msgstr "Бежавы"
 
-#: ../nemo-extensions/nemo-folder-color.py:174
-#: ../caja-extensions/caja-folder-color.py:149
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:64
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:56
 msgid "Yellow"
 msgstr "Жоўты"
 
-#: ../nemo-extensions/nemo-folder-color.py:175
-#: ../caja-extensions/caja-folder-color.py:143
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:65
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:57
 msgid "Orange"
 msgstr "Аранжавы"
 
-#: ../nemo-extensions/nemo-folder-color.py:176
-#: ../caja-extensions/caja-folder-color.py:139
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:66
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:58
 msgid "Brown"
 msgstr "Карычневы"
 
-#: ../nemo-extensions/nemo-folder-color.py:177
-#: ../caja-extensions/caja-folder-color.py:146
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:67
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:59
 msgid "Red"
 msgstr "Чырвоны"
 
-#: ../nemo-extensions/nemo-folder-color.py:178
-#: ../caja-extensions/caja-folder-color.py:145
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:68
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:60
 msgid "Purple"
 msgstr "Фіялетавы"
 
-#: ../nemo-extensions/nemo-folder-color.py:179
-#: ../caja-extensions/caja-folder-color.py:144
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:69
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:61
 msgid "Pink"
 msgstr "Ружовы"
 
-#: ../nemo-extensions/nemo-folder-color.py:180
-#: ../caja-extensions/caja-folder-color.py:138
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:70
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:62
 msgid "Blue"
 msgstr "Сіні"
 
-#: ../nemo-extensions/nemo-folder-color.py:181
-#: ../caja-extensions/caja-folder-color.py:140
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:71
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:63
 msgid "Cyan"
 msgstr "Блакітны"
 
-#. Colors submenu
-#: ../nemo-extensions/nemo-folder-color.py:182
-#: ../caja-extensions/caja-folder-color.py:134
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:72
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:64
 msgid "Aqua"
 msgstr "Аква"
 
-#: ../nemo-extensions/nemo-folder-color.py:183
-#: ../caja-extensions/caja-folder-color.py:147
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:73
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:65
 msgid "Teal"
 msgstr "Бірузовы"
 
-#: ../nemo-extensions/nemo-folder-color.py:184
-#: ../caja-extensions/caja-folder-color.py:141
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:74
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:66
 msgid "Green"
 msgstr "Зялёны"
 
-#: ../nemo-extensions/nemo-folder-color.py:185
-#: ../caja-extensions/caja-folder-color.py:148
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:75
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:67
 msgid "White"
 msgstr "Белы"
 
-#: ../nemo-extensions/nemo-folder-color.py:186
-#: ../caja-extensions/caja-folder-color.py:142
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:76
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:68
 msgid "Grey"
 msgstr "Шэры"
 
-#: ../nemo-extensions/nemo-folder-color.py:187
-#: ../caja-extensions/caja-folder-color.py:137
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:77
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:69
 msgid "Black"
 msgstr "Чорны"
 
-#: ../nemo-extensions/nemo-folder-color.py:230
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:429
 msgid "Restores the color of the selected folders"
 msgstr "Аднавіць зыходны колер вылучаных папак"
 
-#: ../nemo-extensions/nemo-folder-color.py:232
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:431
 msgid "Restores the color of the selected folder"
 msgstr "Аднавіць зыходны колер вылучанай папкі"
 
-#: ../nemo-extensions/nemo-folder-color.py:241
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:441
 #, python-format
 msgid "Changes the color of the selected folders to %s"
 msgstr "Змяніць колер вылучаных папак на %s"
 
-#: ../nemo-extensions/nemo-folder-color.py:243
+#: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:443
 #, python-format
 msgid "Changes the color of the selected folder to %s"
 msgstr "Змяніць колер вылучанай папкі на %s"
 
-#. Main menu [1 or +1 folder(s)]
-#: ../caja-extensions/caja-folder-color.py:129
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:352
 msgid "Change color"
 msgstr "Змяніць колер"
 
-#. Restore
-#: ../caja-extensions/caja-folder-color.py:173
+#: usr/share/caja-python/extensions/caja-folder-color-switcher.py:368
 msgid "Default"
 msgstr "Зыходны"
