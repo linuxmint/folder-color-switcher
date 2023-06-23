@@ -260,7 +260,7 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvide
         if not directories_selected:
             return
 
-        icon_theme_name = Gio.Settings.new("org.cinnamon.desktop.interface").get_string("icon-theme")
+        icon_theme_name = Gio.Settings.new("org.mate.interface").get_string("icon-theme")
         if icon_theme_name in self.styles:
             icon_themes = self.styles[icon_theme_name]["icon-themes"]
             locale.setlocale(locale.LC_ALL, '')
