@@ -8,14 +8,15 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2023-01-18 13:24+0000\n"
-"PO-Revision-Date: 2023-03-19 17:17+0000\n"
+"PO-Revision-Date: 2023-08-13 10:24+0000\n"
 "Last-Translator: Mr.Ravi <Unknown>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-07-07 12:56+0000\n"
-"X-Generator: Launchpad (build 2ac9e3bf4ab511504f8fc651371e24a6a047ba12)\n"
+"X-Launchpad-Export-Date: 2023-12-03 13:32+0000\n"
+"X-Generator: Launchpad (build 886068b1e1d10de444fbd53b0c7d3f6d4fb3e658)\n"
+"Language: fa\n"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:35
 msgid ""
@@ -107,21 +108,21 @@ msgstr "سیاه"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:429
 msgid "Restores the color of the selected folders"
-msgstr "رنگ پوشه‌های گزیده را بازیابی می‌کند"
+msgstr "رنگ پوشه‌های انتخاب شده را بازیابی می‌کند"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:431
 msgid "Restores the color of the selected folder"
-msgstr "رنگ پوشهٔ گزیده را بازیابی می‌کند"
+msgstr "رنگ پوشهٔ انتخاب شده را بازیابی می‌کند"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:441
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr "رنگ پوشه‌های گزیده را به %s تغییر می‌دهد"
+msgstr "رنگ پوشه‌های انتخاب شده را به %s تغییر می‌دهد"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:443
 #, python-format
 msgid "Changes the color of the selected folder to %s"
-msgstr "رنگ پوشهٔ گزیده را به %s تغییر می‌دهد"
+msgstr "رنگ پوشهٔ انتخاب شده را به %s تغییر می‌دهد"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:352
 msgid "Change color"
@@ -129,4 +130,4 @@ msgstr "تغییر رنگ"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:368
 msgid "Default"
-msgstr "پیش‌گزیده"
+msgstr "پیش‌فرض"

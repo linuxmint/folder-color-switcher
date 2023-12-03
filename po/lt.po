@@ -8,20 +8,22 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2023-01-18 13:24+0000\n"
-"PO-Revision-Date: 2022-10-18 19:20+0000\n"
-"Last-Translator: Ernestas Karalius <Unknown>\n"
+"PO-Revision-Date: 2023-10-28 23:22+0000\n"
+"Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-07-07 12:55+0000\n"
-"X-Generator: Launchpad (build 2ac9e3bf4ab511504f8fc651371e24a6a047ba12)\n"
+"X-Launchpad-Export-Date: 2023-12-03 13:32+0000\n"
+"X-Generator: Launchpad (build 886068b1e1d10de444fbd53b0c7d3f6d4fb3e658)\n"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:35
 msgid ""
 "Allows you to change folder colors from the context menu under supported "
 "icon themes"
 msgstr ""
+"Leidžia jums kontekstiniame meniu keisti aplanko spalvas, kai naudojami "
+"palaikomi piktogramų apipavidalinimai"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:62
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:54

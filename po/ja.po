@@ -8,21 +8,21 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2023-01-18 13:24+0000\n"
-"PO-Revision-Date: 2021-06-05 02:02+0000\n"
-"Last-Translator: vega m57 <Unknown>\n"
+"PO-Revision-Date: 2023-12-02 11:01+0000\n"
+"Last-Translator: BALLOON <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-07-07 12:55+0000\n"
-"X-Generator: Launchpad (build 2ac9e3bf4ab511504f8fc651371e24a6a047ba12)\n"
+"X-Launchpad-Export-Date: 2023-12-03 13:32+0000\n"
+"X-Generator: Launchpad (build 886068b1e1d10de444fbd53b0c7d3f6d4fb3e658)\n"
 "Language: ja\n"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:35
 msgid ""
 "Allows you to change folder colors from the context menu under supported "
 "icon themes"
-msgstr ""
+msgstr "サポートされているアイコンテーマにおいて、コンテキストメニューからフォルダーの色を変更できるようにします"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:62
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:54
@@ -97,7 +97,7 @@ msgstr "白"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:76
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:68
 msgid "Grey"
-msgstr "灰"
+msgstr "灰色"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:77
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:69
@@ -115,7 +115,7 @@ msgstr "選択しているフォルダーの色を元に戻します"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:441
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr "選択しているフォルダーの色を%sに変更します"
+msgstr "選択しているフォルダーの色を%sにします"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:443
 #, python-format
@@ -124,7 +124,7 @@ msgstr "選択しているフォルダーの色を%sにします"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:352
 msgid "Change color"
-msgstr "色の変更"
+msgstr "色を変更"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:368
 msgid "Default"

@@ -8,20 +8,22 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2023-01-18 13:24+0000\n"
-"PO-Revision-Date: 2017-02-13 20:14+0000\n"
-"Last-Translator: Rokar ✌ <Unknown>\n"
+"PO-Revision-Date: 2023-08-14 11:16+0000\n"
+"Last-Translator: Sahin Elci <Unknown>\n"
 "Language-Team: Kurdish <ku@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-07-07 12:56+0000\n"
-"X-Generator: Launchpad (build 2ac9e3bf4ab511504f8fc651371e24a6a047ba12)\n"
+"X-Launchpad-Export-Date: 2023-12-03 13:32+0000\n"
+"X-Generator: Launchpad (build 886068b1e1d10de444fbd53b0c7d3f6d4fb3e658)\n"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:35
 msgid ""
 "Allows you to change folder colors from the context menu under supported "
 "icon themes"
 msgstr ""
+"Destûrê dide we ku hûn rengên peldankê ji pêşeka kontekstê di binê mijarên "
+"îkonê yên piştgirî de biguhezînin"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:62
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:54
@@ -31,7 +33,7 @@ msgstr "Qûm"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:63
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:55
 msgid "Beige"
-msgstr "Qîçik"
+msgstr "Rengê xakî"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:64
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:56
@@ -41,7 +43,7 @@ msgstr "Zer"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:65
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:57
 msgid "Orange"
-msgstr "Narincî"
+msgstr "Pirteqalî"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:66
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:58
@@ -105,21 +107,21 @@ msgstr "Reş"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:429
 msgid "Restores the color of the selected folders"
-msgstr ""
+msgstr "Rengê peldankên hilbijartî vedigerîne"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:431
 msgid "Restores the color of the selected folder"
-msgstr ""
+msgstr "Rengê peldanka hilbijartî vedigerîne"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:441
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr ""
+msgstr "Rengê peldankên hilbijartî dibe %s"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:443
 #, python-format
 msgid "Changes the color of the selected folder to %s"
-msgstr ""
+msgstr "Rengê peldanka hilbijartî dibe %s"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:352
 msgid "Change color"
