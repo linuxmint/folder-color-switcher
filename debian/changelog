@@ -1,3 +1,9 @@
+folder-color-switcher (1.6.1) virginia; urgency=medium
+
+  * nemo-extension: Simplify name
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 15 Dec 2023 13:50:14 +0000
+
 folder-color-switcher (1.6.0) virginia; urgency=medium
 
   * l10n: Update translations
