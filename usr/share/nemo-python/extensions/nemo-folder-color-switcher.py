@@ -289,7 +289,7 @@ class ChangeFolderColor(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
         return
 
     def get_name_and_desc(self):
-        return [("Folder Color Switcher:::%s" % PLUGIN_DESCRIPTION)]
+        return [("folder-color-switcher:::%s" % PLUGIN_DESCRIPTION)]
 
     # Nemo invoke this function in its startup > Then, create menu entry
     def get_file_items(self, window, items_selected):
