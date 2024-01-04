@@ -1,16 +1,16 @@
-# Slovenian translation for linuxmint
-# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# Silesian translation for linuxmint
+# Copyright (c) 2023 Rosetta Contributors and Canonical Ltd 2023
 # This file is distributed under the same license as the linuxmint package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2023-01-18 13:24+0000\n"
-"PO-Revision-Date: 2023-01-22 17:35+0000\n"
-"Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
-"Language-Team: Slovenian <sl@li.org>\n"
+"PO-Revision-Date: 2023-12-26 20:02+0000\n"
+"Last-Translator: Marcin Lis <Unknown>\n"
+"Language-Team: Silesian <szl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,110 +22,109 @@ msgid ""
 "Allows you to change folder colors from the context menu under supported "
 "icon themes"
 msgstr ""
-"Omogoča, da spremenite barve map iz kontekstnega menija za podprte teme ikon"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:62
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:54
 msgid "Sand"
-msgstr "Pesek"
+msgstr "Piŏskowy"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:63
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:55
 msgid "Beige"
-msgstr "Bež"
+msgstr "Beżowy"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:64
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:56
 msgid "Yellow"
-msgstr "Rumena"
+msgstr "Żōłty"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:65
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:57
 msgid "Orange"
-msgstr "Oranžna"
+msgstr "Pōmarańczowy"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:66
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:58
 msgid "Brown"
-msgstr "Rjava"
+msgstr "Brōnŏtny"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:67
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:59
 msgid "Red"
-msgstr "Rdeča"
+msgstr "Czyrwōny"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:68
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:60
 msgid "Purple"
-msgstr "Vijolična"
+msgstr "Lilowy"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:69
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:61
 msgid "Pink"
-msgstr "Rožnata"
+msgstr "Rōżowy"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:70
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:62
 msgid "Blue"
-msgstr "Modra"
+msgstr "Modry"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:71
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:63
 msgid "Cyan"
-msgstr "Cianasta"
+msgstr "Cyjan"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:72
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:64
 msgid "Aqua"
-msgstr "Aqua"
+msgstr ""
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:73
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:65
 msgid "Teal"
-msgstr "Modrozelena"
+msgstr "Morski"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:74
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:66
 msgid "Green"
-msgstr "Zelena"
+msgstr "Zielōny"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:75
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:67
 msgid "White"
-msgstr "Bela"
+msgstr "Bioły"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:76
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:68
 msgid "Grey"
-msgstr "Siva"
+msgstr "Siwy"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:77
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:69
 msgid "Black"
-msgstr "Črna"
+msgstr "Czŏrny"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:429
 msgid "Restores the color of the selected folders"
-msgstr "Obnovi barvo izbranih map"
+msgstr "Dŏwŏ nazŏd farbã ôbranych katalogōw"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:431
 msgid "Restores the color of the selected folder"
-msgstr "Obnovi barvo izbrane mape"
+msgstr "Dŏwŏ nazŏd farbã ôbranego katalogu"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:441
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr "Spremeni barvo izbranih map v %s"
+msgstr "Zmiyniŏ farbã ôbranych katalogōw na %s"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:443
 #, python-format
 msgid "Changes the color of the selected folder to %s"
-msgstr "Spremeni barvo izbrane mape v %s"
+msgstr "Zmiyniŏ farbã ôbranego katalogu na %s"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:352
 msgid "Change color"
-msgstr "Spremeni barvo"
+msgstr "Zmiyń farbã"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:368
 msgid "Default"
-msgstr "Privzeto"
+msgstr ""

@@ -8,22 +8,22 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2023-01-18 13:24+0000\n"
-"PO-Revision-Date: 2023-05-18 16:29+0000\n"
-"Last-Translator: karm <melo@carmu.com>\n"
+"PO-Revision-Date: 2023-12-31 20:53+0000\n"
+"Last-Translator: famese <Unknown>\n"
 "Language-Team: Interlingua <ia@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2023-12-03 13:32+0000\n"
-"X-Generator: Launchpad (build 886068b1e1d10de444fbd53b0c7d3f6d4fb3e658)\n"
+"X-Launchpad-Export-Date: 2024-01-04 14:56+0000\n"
+"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:35
 msgid ""
 "Allows you to change folder colors from the context menu under supported "
 "icon themes"
 msgstr ""
-"Te permitte de cambiar le colores de plica ab le menu contextual sub le "
-"themas de icone supportate"
+"Permitte cambiar le colores de dossier ab le menu contextual sub le themas "
+"de icone supportate"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:62
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:54
@@ -58,7 +58,7 @@ msgstr "Rubie"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:68
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:60
 msgid "Purple"
-msgstr "purpura"
+msgstr "Purpura"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:69
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:61
@@ -83,7 +83,7 @@ msgstr "Aqua"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:73
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:65
 msgid "Teal"
-msgstr "Color folia de té"
+msgstr "Verdeblau"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:74
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:66
@@ -107,25 +107,25 @@ msgstr "Nigre"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:429
 msgid "Restores the color of the selected folders"
-msgstr "Restaura le color del plicas seligite"
+msgstr "Restaura le color del dossieres seligite"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:431
 msgid "Restores the color of the selected folder"
-msgstr "Restaura le color del plica seligite"
+msgstr "Restaura le color del dossier seligite"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:441
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr "Cambia le color del plicas seligite a %s"
+msgstr "Cambia le color del dossieres seligite a %s"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:443
 #, python-format
 msgid "Changes the color of the selected folder to %s"
-msgstr "Cambia le color del plicas seligite a %s"
+msgstr "Cambia le color del dossier seligite a %s"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:352
 msgid "Change color"
-msgstr "Cambiar le color"
+msgstr "Cambiar color"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:368
 msgid "Default"
