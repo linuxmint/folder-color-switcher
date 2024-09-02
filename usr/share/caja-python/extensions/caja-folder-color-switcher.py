@@ -260,7 +260,7 @@ class ChangeColorFolder(ChangeFolderColorBase, GObject.GObject, Caja.MenuProvide
         if not directories_selected:
             return
 
-        icon_theme_name = Gio.Settings.new("org.mate.interface").get_string("icon-theme")
+        icon_theme_name = Gtk.Settings.get_default().get_property("gtk-icon-theme-name")
         if icon_theme_name in self.styles:
             icon_themes = self.styles[icon_theme_name]["icon-themes"]
             locale.setlocale(locale.LC_ALL, '')
