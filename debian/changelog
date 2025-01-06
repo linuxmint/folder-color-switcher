@@ -1,3 +1,9 @@
+folder-color-switcher (1.6.7) xia; urgency=medium
+
+  * l10n: Update translations
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 06 Jan 2025 13:59:47 +0000
+
 folder-color-switcher (1.6.6) xia; urgency=medium
 
   * l10n: Update translations
