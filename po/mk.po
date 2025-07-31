@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2023-01-18 13:24+0000\n"
-"PO-Revision-Date: 2015-02-03 17:00+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2025-07-02 01:27+0000\n"
+"Last-Translator: Marjan Dee <mrjndmtrv@gmail.com>\n"
 "Language-Team: Macedonian <mk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2025-01-06 11:57+0000\n"
-"X-Generator: Launchpad (build 6394e03793719e8d73f5a60b5439440e693c92f1)\n"
+"X-Launchpad-Export-Date: 2025-07-31 09:20+0000\n"
+"X-Generator: Launchpad (build 647c49fc7f614412c17a151d8ba4fadd90c06a00)\n"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:35
 msgid ""
@@ -31,7 +31,7 @@ msgstr ""
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:63
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:55
 msgid "Beige"
-msgstr ""
+msgstr "Беж (драп)"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:64
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:56
@@ -41,7 +41,7 @@ msgstr ""
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:65
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:57
 msgid "Orange"
-msgstr ""
+msgstr "Портокалова"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:66
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:58
@@ -56,12 +56,12 @@ msgstr ""
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:68
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:60
 msgid "Purple"
-msgstr ""
+msgstr "Виолетова"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:69
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:61
 msgid "Pink"
-msgstr ""
+msgstr "Розова"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:70
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:62
@@ -81,7 +81,7 @@ msgstr ""
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:73
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:65
 msgid "Teal"
-msgstr ""
+msgstr "Сино-зелена"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:74
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:66
@@ -101,29 +101,29 @@ msgstr ""
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:77
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:69
 msgid "Black"
-msgstr ""
+msgstr "Црна"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:429
 msgid "Restores the color of the selected folders"
-msgstr ""
+msgstr "Пак ја враќа бојата на избраните папки"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:431
 msgid "Restores the color of the selected folder"
-msgstr ""
+msgstr "Пак ја враќа бојата на избраната папка"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:441
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr ""
+msgstr "Ја менува бојата на избраните папки во %s"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:443
 #, python-format
 msgid "Changes the color of the selected folder to %s"
-msgstr ""
+msgstr "Ја менува бојата на избраната папка во %s"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:352
 msgid "Change color"
-msgstr ""
+msgstr "Промени боја"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:368
 msgid "Default"
