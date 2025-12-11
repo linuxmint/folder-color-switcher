@@ -1,3 +1,10 @@
+folder-color-switcher (1.6.9) zena; urgency=medium
+
+  [ fffrankieh ]
+  * do not change folder modification time (#38)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 11 Dec 2025 13:56:19 +0000
+
 folder-color-switcher (1.6.8) zara; urgency=medium
 
   * l10n: Update translations
