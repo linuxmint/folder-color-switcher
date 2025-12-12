@@ -1,3 +1,9 @@
+folder-color-switcher (1.7.0) zena; urgency=medium
+
+  * l10n: Update translations
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 12 Dec 2025 16:51:18 +0000
+
 folder-color-switcher (1.6.9) zena; urgency=medium
 
   [ fffrankieh ]
