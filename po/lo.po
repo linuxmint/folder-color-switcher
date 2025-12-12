@@ -8,20 +8,20 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2023-01-18 13:24+0000\n"
-"PO-Revision-Date: 2015-07-30 06:14+0000\n"
+"PO-Revision-Date: 2025-10-15 10:09+0000\n"
 "Last-Translator: Rockworld <sumoisrock@gmail.com>\n"
 "Language-Team: Lao <lo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2025-07-31 09:20+0000\n"
-"X-Generator: Launchpad (build 647c49fc7f614412c17a151d8ba4fadd90c06a00)\n"
+"X-Launchpad-Export-Date: 2025-12-12 13:29+0000\n"
+"X-Generator: Launchpad (build 379e22b8475e3402088a4cdb4a6e7936a4d28414)\n"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:35
 msgid ""
 "Allows you to change folder colors from the context menu under supported "
 "icon themes"
-msgstr ""
+msgstr "ອະນຸຍາດໃຫ້ທ່ານປ່ຽນສີໂຟນເດີຈາກເມນູສະພາບການພາຍໃຕ້ຮູບແບບໄອຄອນທີ່ຮອງຮັບ"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:62
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:54
@@ -81,12 +81,12 @@ msgstr "ອາຄົວ"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:73
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:65
 msgid "Teal"
-msgstr ""
+msgstr "ສີຂຽວແກ່"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:74
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:66
 msgid "Green"
-msgstr ""
+msgstr "ສີຂຽວ"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:75
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:67
@@ -96,7 +96,7 @@ msgstr "ຂາວ"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:76
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:68
 msgid "Grey"
-msgstr ""
+msgstr "ສີເທົາ"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:77
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:69
@@ -105,26 +105,26 @@ msgstr "ດຳ"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:429
 msgid "Restores the color of the selected folders"
-msgstr ""
+msgstr "ກູ້ຄືນສີຂອງໂຟນເດີທີ່ເລືອກໄວ້"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:431
 msgid "Restores the color of the selected folder"
-msgstr ""
+msgstr "ກູ້ຄືນສີຂອງໂຟນເດີທີ່ເລືອກ"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:441
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr ""
+msgstr "ປ່ຽນສີຂອງໂຟນເດີທີ່ເລືອກເປັນ %s"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:443
 #, python-format
 msgid "Changes the color of the selected folder to %s"
-msgstr ""
+msgstr "ປ່ຽນສີຂອງໂຟນເດີທີ່ເລືອກເປັນ %s"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:352
 msgid "Change color"
-msgstr ""
+msgstr "ປ່ຽນສີ"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:368
 msgid "Default"
-msgstr ""
+msgstr "ຄ່າເລີ່ມຕົ້ນ"

@@ -8,20 +8,22 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2023-01-18 13:24+0000\n"
-"PO-Revision-Date: 2015-03-18 20:31+0000\n"
-"Last-Translator: Ueliton <Unknown>\n"
+"PO-Revision-Date: 2025-10-27 14:17+0000\n"
+"Last-Translator: Emir Mendoza Emir's BTIN <Unknown>\n"
 "Language-Team: Filipino <fil@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2025-07-31 09:20+0000\n"
-"X-Generator: Launchpad (build 647c49fc7f614412c17a151d8ba4fadd90c06a00)\n"
+"X-Launchpad-Export-Date: 2025-12-12 13:29+0000\n"
+"X-Generator: Launchpad (build 379e22b8475e3402088a4cdb4a6e7936a4d28414)\n"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:35
 msgid ""
 "Allows you to change folder colors from the context menu under supported "
 "icon themes"
 msgstr ""
+"Pwede mong palitan ang kulay ng folders mula sa context menu sa ilalim ng "
+"suportadong icon themes"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:62
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:54
@@ -41,32 +43,32 @@ msgstr "Dilaw"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:65
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:57
 msgid "Orange"
-msgstr "Dalandan"
+msgstr "Kahel"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:66
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:58
 msgid "Brown"
-msgstr "kayumanggi"
+msgstr "Kayumanggi"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:67
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:59
 msgid "Red"
-msgstr "Mapula"
+msgstr "Pula"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:68
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:60
 msgid "Purple"
-msgstr "Kulay-ube"
+msgstr "Ube"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:69
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:61
 msgid "Pink"
-msgstr "Kulay-rosas"
+msgstr "Rosas"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:70
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:62
 msgid "Blue"
-msgstr "Asul"
+msgstr "Bughaw"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:71
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:63
@@ -81,7 +83,7 @@ msgstr "Tubig"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:73
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:65
 msgid "Teal"
-msgstr "Tial"
+msgstr "Teal"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:74
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:66
@@ -96,7 +98,7 @@ msgstr "Puti"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:76
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:68
 msgid "Grey"
-msgstr "Kulay-abo"
+msgstr "Abo"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:77
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:69
@@ -105,16 +107,16 @@ msgstr "Itim"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:429
 msgid "Restores the color of the selected folders"
-msgstr "Muling nagtatakda ng kulay sa napiling folder"
+msgstr "Ibinabalik ang kulay ng mga piniling folder"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:431
 msgid "Restores the color of the selected folder"
-msgstr "Muling nagtatakda ng kulay nasa mga napiling folder"
+msgstr "Ibinabalik ang kulay ng piniling folder"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:441
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr "Baguhin ang kulay ng mga napiling folder sa %s"
+msgstr "Gawing %s ang kulay ng mga piniling folder"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:443
 #, python-format
@@ -127,4 +129,4 @@ msgstr "Baguhin ang kulay"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:368
 msgid "Default"
-msgstr "Pamantayan"
+msgstr "Default"
