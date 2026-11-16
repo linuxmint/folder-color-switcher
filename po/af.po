@@ -8,20 +8,22 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2023-01-18 13:24+0000\n"
-"PO-Revision-Date: 2017-04-30 10:27+0000\n"
+"PO-Revision-Date: 2026-10-07 15:07+0000\n"
 "Last-Translator: James <h8r1dx4@gmail.com>\n"
 "Language-Team: Afrikaans <af@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-01-08 15:40+0000\n"
-"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
+"X-Launchpad-Export-Date: 2026-11-16 11:56+0000\n"
+"X-Generator: Launchpad (build 72ba15af7e009b17d4aa1467977127ac8392a4de)\n"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:35
 msgid ""
 "Allows you to change folder colors from the context menu under supported "
 "icon themes"
 msgstr ""
+"Laat jou toe om vouerkleure vanaf die kontekskieslys te verander onder "
+"ondersteunde ikoontemas"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:62
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:54
@@ -31,7 +33,7 @@ msgstr "Sand"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:63
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:55
 msgid "Beige"
-msgstr ""
+msgstr "Beige"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:64
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:56
@@ -71,17 +73,17 @@ msgstr "Blou"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:71
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:63
 msgid "Cyan"
-msgstr ""
+msgstr "Siaan"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:72
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:64
 msgid "Aqua"
-msgstr ""
+msgstr "Akwablou"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:73
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:65
 msgid "Teal"
-msgstr ""
+msgstr "Blougroen"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:74
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:66
@@ -105,26 +107,26 @@ msgstr "Swart"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:429
 msgid "Restores the color of the selected folders"
-msgstr ""
+msgstr "Herstel die kleur van die gekose vouers"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:431
 msgid "Restores the color of the selected folder"
-msgstr ""
+msgstr "Herstel die kleur van die gekose vouer"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:441
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr ""
+msgstr "Verander die kleur van die gekose vouers na %s"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:443
 #, python-format
 msgid "Changes the color of the selected folder to %s"
-msgstr ""
+msgstr "Verander die kleur van die gekose vouer na %s"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:352
 msgid "Change color"
-msgstr ""
+msgstr "Verander kleur"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:368
 msgid "Default"
-msgstr ""
+msgstr "Verstek"

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2023-01-18 13:24+0000\n"
-"PO-Revision-Date: 2018-08-10 21:38+0000\n"
-"Last-Translator: Arif <mdyos@inbox.ru>\n"
+"PO-Revision-Date: 2026-09-29 09:04+0000\n"
+"Last-Translator: Nicat Məmmədov <n1c4t97@gmail.com>\n"
 "Language-Team: Azerbaijani <az@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-01-08 15:40+0000\n"
-"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
+"X-Launchpad-Export-Date: 2026-11-16 11:56+0000\n"
+"X-Generator: Launchpad (build 72ba15af7e009b17d4aa1467977127ac8392a4de)\n"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:35
 msgid ""
@@ -41,7 +41,7 @@ msgstr "Sarı"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:65
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:57
 msgid "Orange"
-msgstr "Turuncu"
+msgstr "Narıncı"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:66
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:58

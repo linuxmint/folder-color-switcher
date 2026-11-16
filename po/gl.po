@@ -8,25 +8,27 @@ msgstr ""
 "Project-Id-Version: linuxmint\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2023-01-18 13:24+0000\n"
-"PO-Revision-Date: 2015-03-13 08:48+0000\n"
-"Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>\n"
+"PO-Revision-Date: 2026-10-30 04:27+0000\n"
+"Last-Translator: Calq Calquera <Unknown>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2026-01-08 15:40+0000\n"
-"X-Generator: Launchpad (build 99c00f518760bdd50fc6e353e7736d2fff8fba4a)\n"
+"X-Launchpad-Export-Date: 2026-11-16 11:56+0000\n"
+"X-Generator: Launchpad (build 72ba15af7e009b17d4aa1467977127ac8392a4de)\n"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:35
 msgid ""
 "Allows you to change folder colors from the context menu under supported "
 "icon themes"
 msgstr ""
+"Permite cambiar as cores dos cartafoles desde o menú contextual nos temas de "
+"iconas compatibles"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:62
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:54
 msgid "Sand"
-msgstr "Aréa"
+msgstr "Area"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:63
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:55
@@ -71,12 +73,12 @@ msgstr "Azul"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:71
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:63
 msgid "Cyan"
-msgstr "Cián"
+msgstr "Ciano"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:72
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:64
 msgid "Aqua"
-msgstr "Auga"
+msgstr "Augamariña"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:73
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:65
@@ -114,12 +116,12 @@ msgstr "Restaura a cor do cartafol seleccionado"
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:441
 #, python-format
 msgid "Changes the color of the selected folders to %s"
-msgstr "Cambia a cor dos cartafoles seleccionados ao %s"
+msgstr "Cambia a cor dos cartafoles seleccionados a %s"
 
 #: usr/share/nemo-python/extensions/nemo-folder-color-switcher.py:443
 #, python-format
 msgid "Changes the color of the selected folder to %s"
-msgstr "Cambia a cor do cartafol seleccionado ao %s"
+msgstr "Cambia a cor do cartafol seleccionado a %s"
 
 #: usr/share/caja-python/extensions/caja-folder-color-switcher.py:352
 msgid "Change color"
