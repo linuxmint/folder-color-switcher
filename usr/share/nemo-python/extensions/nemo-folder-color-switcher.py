@@ -20,7 +20,10 @@ LOCALE_DIR = "/usr/share/locale"
 locale.bindtextdomain(APP, LOCALE_DIR)
 gettext.bindtextdomain(APP, LOCALE_DIR)
 gettext.textdomain(APP)
-_ = gettext.gettext
+# Use our own catalog, loaded once: gettext.gettext() searches the disk for the
+# .mo file on every call and depends on the global domain, which other
+# nemo-python extensions in this process can change.
+_ = gettext.translation(APP, LOCALE_DIR, fallback=True).gettext
 
 PLUGIN_DESCRIPTION = _('Allows you to change folder colors from the context menu under supported icon themes')
 
@@ -281,6 +284,9 @@ class ChangeFolderColor(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
     def __init__(self):
         super().__init__()
 
+        self.color_svg = None
+        self.color_surfaces = {}
+
         logger.info("Initializing folder-color-switcher extension...")
 
     def menu_activate_cb(self, menu, icon_theme, folders):
@@ -325,9 +331,6 @@ class ChangeFolderColor(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
         icon_theme_name = Gtk.Settings.get_default().get_property("gtk-icon-theme-name")
         if icon_theme_name in self.styles:
             icon_themes = self.styles[icon_theme_name]["icon-themes"]
-            locale.setlocale(locale.LC_ALL, '')
-            gettext.bindtextdomain('folder-color-switcher')
-            gettext.textdomain('folder-color-switcher')
             logger.debug("At least one color supported: creating menu entry")
             item = Nemo.MenuItem(name='ChangeFolderColorMenu::Top')
             item.set_widget_a(self.generate_widget(icon_themes, directories_selected))
@@ -367,6 +370,27 @@ class ChangeFolderColor(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
 
         return widget
 
+    def get_color_surface(self, icon_theme):
+        # The menu is rebuilt (twice) on every right-click on a folder.
+        # Rendering each color's SVG every time made that take about a second
+        # on slow CPUs, so render each color once per scale and reuse it.
+        color = icon_theme["color"]
+        color2 = icon_theme.get("color2", color)
+        key = (color, color2, self.scale_factor)
+        surface = self.color_surfaces.get(key)
+
+        if surface is None:
+            if self.color_svg is None:
+                with open("/usr/share/folder-color-switcher/color.svg") as f:
+                    self.color_svg = f.read()
+            svg = self.color_svg.replace("#71718e", color).replace("#4bb4aa", color2)
+            stream = Gio.MemoryInputStream.new_from_bytes(GLib.Bytes.new(str.encode(svg)))
+            pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(stream, 12 * self.scale_factor, 12 * self.scale_factor, True, None)
+            surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.scale_factor)
+            self.color_surfaces[key] = surface
+
+        return surface
+
     def make_button(self, icon_theme):
         button = Nemo.SimpleButton()
         c = button.get_style_context()
@@ -376,18 +400,6 @@ class ChangeFolderColor(ChangeFolderColorBase, GObject.GObject, Nemo.MenuProvide
             button.set_image(image)
         else:
             c.add_class("folder-color-switcher-button")
-            self.color_svg = ""
-            with open("/usr/share/folder-color-switcher/color.svg") as f:
-                self.color_svg = f.read()
-            svg = self.color_svg.replace("#71718e", icon_theme["color"])
-            if "color2" in icon_theme:
-                svg = svg.replace("#4bb4aa", icon_theme["color2"])
-            else:
-                svg = svg.replace("#4bb4aa", icon_theme["color"])
-            svg = str.encode(svg)
-            stream = Gio.MemoryInputStream.new_from_bytes(GLib.Bytes.new(svg))
-            pixbuf = GdkPixbuf.Pixbuf.new_from_stream_at_scale(stream, 12 * self.scale_factor, 12 * self.scale_factor, True, None)
-            surface = Gdk.cairo_surface_create_from_pixbuf(pixbuf, self.scale_factor)
-            image = Gtk.Image.new_from_surface(surface)
+            image = Gtk.Image.new_from_surface(self.get_color_surface(icon_theme))
             button.set_image(image)
         return button
